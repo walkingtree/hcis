@@ -1,0 +1,22 @@
+#
+#Fri Jul 30 14:59:48 IST 2010
+genBasicCompId=true
+sessionFactoryName=com.wtc.hcis.ip.da.HibernateSessionFactory
+profile=
+daoSFId=sessionFactory
+version=3.2
+jndiPath=
+detectM2M=true
+reStrategyClass=
+springDaoFile=src/applicationContext.xml
+useJavaTypes=true
+keyGenerator=assigned
+libInstallFolder=/lib
+addLibs2Project=true
+genVersionTag=true
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+reSettingsFile=
+configFile=/InpatientDA/src/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true

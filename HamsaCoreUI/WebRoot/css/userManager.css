@@ -1,0 +1,69 @@
+.imageText{
+	text-align:center;
+	font-size:11px;
+	font-weight:bold;
+}
+
+.x-tab-panel-header, .x-tab-panel-footer{
+	background : none;
+}
+ul.x-tab-strip-top {
+background : none;
+padding-top: 0px;
+}
+.x-tab-panel-header{
+		border : none;
+}
+.defaultCellCls{
+	padding:5px;
+}
+.labelCls{
+	color:white;
+}	
+.search_btn {
+	background-image: url(../images/find.png) !important;
+}
+
+.save_btn {
+	background-image: url(../images/disk.png) !important;
+}
+
+.cancel_btn {
+	background-image: url(../images/arrow_undo.png) !important;
+}
+
+.add_btn {
+	background-image: url(../images/add.png) !important;
+}
+
+.edit_btn {
+	background-image: url(../images/pencil.png) !important;
+}
+
+.delete_btn {
+	background-image: url(../images/delete.png) !important;
+}
+
+.home-icon {
+	background-image: url(../images/house.png) !important;
+}
+
+.dashboard-icon {
+	background-image: url(../images/chart_curve.png) !important;
+}
+
+.report-icon {
+	background-image: url(../images/report.png) !important;
+}
+
+.setting-icon {
+	background-image: url(../images/wrench_orange.png) !important;
+}
+
+.help-icon {
+	background-image: url(../images/help.png) !important;
+}
+
+.roster-icon {
+	background-image: url(../images/date_go.png) !important;
+}

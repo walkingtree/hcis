@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<Schema name="FoodMart">
+
+<!-- Cubes for HaMSa  -->
+<Cube name="appointment">
+   <Table name="appointments"/>
+
+<Dimension name="Date" foreignKey="DATE_DIM_ID">
+	<Hierarchy hasAll="true" allMemberName="All Dates" primaryKey="DATE_ID">
+		<Table name="DATE_DIM"/>
+			<Level name="YEAR" column="YEAR" type="Integer" uniqueMembers="false"/>
+
+<!-- Here nameColum is used to take date from "MONTH" column, and month name from "MONTH_NAME"
+in this way we get MonthName in sorted order -->
+			<Level name="MONTH" column="MONTH" nameColumn="MONTH_NAME" uniqueMembers="false"/>
+
+			<Level name="DAY OF MONTH" column="DAY_OF_MONTH" type="Integer" uniqueMembers="false"/>
+	</Hierarchy>
+</Dimension>
+
+   <Dimension name="Doctor" foreignKey="DOCTOR_ID">
+     <Hierarchy hasAll="true" allMemberName="All Doctors" primaryKey="DOCTOR_ID">
+	<Table name="DOCTOR"/>
+		<Level name="Doctor" column="FULL_NAME" uniqueMembers="false"/>
+		<Level name="Doctor ID" column="DOCTOR_ID" uniqueMembers="false"/>
+	</Hierarchy>
+   </Dimension>
+
+<Dimension name="Patient" foreignKey="PATIENT_ID">
+     <Hierarchy hasAll="true" allMemberName="All patients" primaryKey="PATIENT_ID" primaryKeyTable="patient">
+
+		<Join leftKey="PATIENT_ID"  rightKey="PERSONEL_ID">
+  		
+     		<Table name="patient"/>
+			<Join leftKey="CONTACT_CODE" rightKey="CONTACT_CODE">
+				<Table name="entity_contact_code">
+				<SQL>
+				("entity_contact_code"."FOR_ENTITY_CODE" = 'PATIENT')
+				</SQL>
+				</Table>
+				<Join leftKey="COUNTRY_CODE"  rightKey="COUNTRY_CODE">
+					<Table name="contact_details"/>
+						<Join leftKey="STATE_CODE" rightKey="STATE_CODE">
+						<Table name="state"/>
+						<Table name="country"/>
+					</Join>
+				</Join>
+			</Join>
+		</Join>	
+
+	
+	<Level name="PatientId" table="patient" column="PATIENT_ID" uniqueMembers="false"/>
+	<Level name="Patient Name" table="patient" column="FULL_NAME" uniqueMembers="false"/>
+	
+
+	<Level name="City"  table="contact_details" column="CITY" uniqueMembers="false"/>
+
+      <Level name="Country" table="country" column="COUNTRY_CODE" uniqueMembers="false"/>      
+      <Level name="State" table="state" column="STATE_CODE" uniqueMembers="false"/>
+
+
+      </Hierarchy>
+  </Dimension>
+
+ 
+<Measure name="Total" column="APPOINTMENT_NUMBER" aggregator="count" formatString="#,###">
+   </Measure>
+
+</Cube>
+
+<Cube name="ASSIGNEDSERVICES">
+   <Table name="ASSIGNED_SERVICES"/>
+
+   <Dimension name="Doctor" foreignKey="DOCTOR_ID">
+     <Hierarchy hasAll="true" allMemberName="All Doctors" primaryKey="DOCTOR_ID">
+<Table name="DOCTOR"/>
+<Level name="Doctor" column="FULL_NAME" uniqueMembers="false"/>
+<Level name="Doctor ID" column="DOCTOR_ID" uniqueMembers="false"/>
+</Hierarchy>
+   </Dimension>
+
+
+   <Dimension name="Service" foreignKey="SERVICE_CODE">
+     <Hierarchy hasAll="true" allMemberName="All Services" primaryKey="SERVICE_CODE">
+	<Table name="SERVICE"/>
+	<Level name="ServiceName" column="SERVICE_NAME" uniqueMembers="false"/>
+	<Level name="Services" column="SERVICE_CODE" uniqueMembers="false"/>
+    </Hierarchy>
+  </Dimension>
+
+<Dimension name="Date" foreignKey="DATE_DIM_ID">
+	<Hierarchy hasAll="true" allMemberName="All Dates" primaryKey="DATE_ID">
+		<Table name="DATE_DIM"/>
+			<Level name="YEAR" column="YEAR" type="Integer" uniqueMembers="false"/>
+
+<!-- Here nameColum is used to take date from "MONTH" column, and month name from "MONTH_NAME"
+in this way we get MonthName in sorted order -->
+			<Level name="MONTH" column="MONTH" nameColumn="MONTH_NAME" uniqueMembers="false"/>
+
+			<Level name="DAY OF MONTH" column="DAY_OF_MONTH" type="Integer" uniqueMembers="false"/>
+	</Hierarchy>
+</Dimension>
+
+
+   
+<Measure name="REQUESTED_UNITS" column="REQUESTED_UNITS" aggregator="sum" formatString="#,###">
+   </Measure>
+<Measure name="RENDERED_UNITS" column="RENDERED_UNITS" aggregator="sum" formatString="#,###">
+   </Measure>
+<Measure name="CANCELED_UNITS" column="CANCELED_UNITS" aggregator="sum" formatString="#,###">
+   </Measure>
+<Measure name="SERVICE_CHARGE" column="CANCELED_UNITS" aggregator="sum" formatString="#,###">
+   </Measure>
+
+</Cube>
+
+</Schema>

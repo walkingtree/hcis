@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="PatientRegistrationCard"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="400"
+		 pageHeight="200"
+		 columnWidth="340"
+		 columnSpacing="0"
+		 leftMargin="10"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="5"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="fullName" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Full Name]]></parameterDescription>
+	</parameter>
+	<parameter name="patientId" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Patient Id]]></parameterDescription>
+	</parameter>
+	<parameter name="street" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[Street Address]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["Plot# 21, 1st Floor, R.K. Nagar"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="area" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[Area]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["West Maredpally"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="city" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[City]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["Secunderabad"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="stateCountry" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[State(Country)]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["A.P.(India)"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dob" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[Date Of Birth]]></parameterDescription>
+	</parameter>
+	<parameter name="gender" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[Gender]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["Male"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="phoneNumber" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Phone Number]]></parameterDescription>
+	</parameter>
+	<parameter name="reportsDirPath" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="separator" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[java.io.File.separator]]></defaultValueExpression>
+	</parameter>
+	<parameter name="patientImage" isForPrompting="false" class="java.lang.Object"/>
+	<parameter name="regDateAndTime" isForPrompting="false" class="java.util.Date"/>
+	<parameter name="bottomMessage" isForPrompting="false" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="160"  isSplitAllowed="true" >
+				<rectangle>
+					<reportElement
+						mode="Opaque"
+						x="5"
+						y="1"
+						width="340"
+						height="37"
+						forecolor="#FFFFFF"
+						backcolor="#FFFFFF"
+						key="rectangle-1"/>
+					<graphicElement stretchType="NoStretch" fill="Solid" />
+				</rectangle>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="5"
+						y="5"
+						width="75"
+						height="37"
+						key="image-1"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{reportsDirPath}+ $P{separator}+ "images"+$P{separator}+"yashoda_logo.jpg"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement
+						x="101"
+						y="9"
+						width="196"
+						height="23"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="15" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Patient Registration Card]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="17"
+						y="48"
+						width="158"
+						height="20"
+						key="staticText-2"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Patient ID             :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="17"
+						y="67"
+						width="109"
+						height="20"
+						key="staticText-3"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Name                    :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="67"
+						width="272"
+						height="19"
+						key="textField-1"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{fullName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="48"
+						width="272"
+						height="19"
+						key="textField-3"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{patientId}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="17"
+						y="124"
+						width="96"
+						height="20"
+						key="staticText-6"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Address               :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="125"
+						width="176"
+						height="29"
+						key="textField-4"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(($P{street} != null)&&!($P{street}.isEmpty()) ? $P{street}+", ":"" )+(($P{city} != null)&&!($P{city}).isEmpty() ? $P{city}+", " : "")+(($P{stateCountry} != null) ? $P{stateCountry} : "")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="17"
+						y="106"
+						width="96"
+						height="20"
+						key="staticText-13"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Phone No             :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="106"
+						width="272"
+						height="19"
+						key="textField-10"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{phoneNumber}]]></textFieldExpression>
+				</textField>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="303"
+						y="32"
+						width="67"
+						height="85"
+						key="image-2"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.awt.Image"><![CDATA[$P{patientImage}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="87"
+						width="198"
+						height="19"
+						key="textField-11"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$P{regDateAndTime}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="18"
+						y="86"
+						width="108"
+						height="20"
+						key="staticText-14"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Reg. date & time :]]></text>
+				</staticText>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="false" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="29"
+						y="4"
+						width="322"
+						height="16"
+						forecolor="#F03C0C"
+						backcolor="#FFFFFF"
+						key="textField-12"/>
+					<box></box>
+					<textElement isStyledText="true">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{bottomMessage}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

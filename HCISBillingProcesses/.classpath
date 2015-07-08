@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBillingBM"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ProcessInterface"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UserManagerBL"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/InpatientManagement"/>
+	<classpathentry kind="lib" path="lib/commons-attributes-api.jar"/>
+	<classpathentry kind="lib" path="lib/commons-attributes-compiler.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EagleWebServicesIntegration"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

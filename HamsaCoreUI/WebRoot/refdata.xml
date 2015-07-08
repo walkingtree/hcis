@@ -1,0 +1,26 @@
+<catalog>
+	<referral-type>
+		<code>DOCTOR</code>
+		<description>Doctor</description>
+	</referral-type>
+	<referral-type>
+		<code>HOSPITAL</code>
+		<description>Hospital</description>
+	</referral-type>
+	<referral-type>
+		<code>CLINIC</code>
+		<description>Clinic</description>
+	</referral-type>
+	<referral-type>
+		<code>OLD-PAT</code>
+		<description>Old Patient</description>
+	</referral-type>
+	<comission-type>
+		<code>PERCENTAGE</code>
+		<description>PERCENTAGE</description>
+	</comission-type>
+	<comission-type>
+		<code>ABSOLUTE</code>
+		<description>ABSOLUTE</description>
+	</comission-type>
+</catalog>

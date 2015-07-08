@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" >
+
+	
+	
+	
+	
+	<bean id="LimsDataModelManager" class="in.wtc.lims.common.LimsDataModelManagerImpl">
+		<property name="techniqueReagentDAO">
+			<ref bean="LabTechniqueReagentDAO"/>
+		</property>
+		<property name="requisitionOrderDAO">
+			<ref bean="LabRequisitionOrderDAO"/>
+		</property>
+		<property name="hospitalDAO">
+		<ref bean= "HospitalDAO"/>
+		</property>
+		
+		<property name="labDetailsDAO">
+		<ref bean= "LabDetailsDAO"/>
+		</property>
+		
+		<property name="contactDetailsDAO">
+		<ref bean= "ContactDetailsDAO"/>
+		</property>
+		
+		<property name="referenceDataListDAO">
+		<ref bean= "ReferenceDataListDAO"/>
+		</property>
+		
+		<property name="testAttributeDAO">
+			<ref bean="LabTestAttributeDAO"/>
+		</property>
+		
+		<property name="labTestTemplateDAO">
+			<ref bean="LabTestTemplateDAO"/>
+		</property>
+		
+		<property name="labTestDAO">
+			<ref bean="LabTestDAO"/>
+		</property>
+		
+		<property name="labSpecimenDAO">
+			<ref bean="LabSpecimenDAO"/>
+		</property>
+		
+		<property name="labTemplateWidgetDAO">
+			<ref bean="LabTemplateWidgetDAO"/>
+		</property>
+		<property name="patientTestDetailDAO">
+			<ref bean="LabPatientTestDetailDAO"/>
+		</property>
+		<property name="collectionPointDAO">
+			<ref bean="LabCollectionPointDAOExtn"/>
+		</property>
+ 		
+	</bean> 
+	
+	<bean id="LimsDataModelConvertor" class="in.wtc.lims.common.LimsDataModelConvertor">
+		<property name="dataModelManager">
+		<ref bean= "LimsDataModelManager"/>
+		</property>
+		
+		<property name="coreDataModelManager">
+		<ref bean= "DataModelManager"/>
+		</property>
+		
+	</bean>
+	
+	
+	
+		<bean id="LabDetailManager" class="in.wtc.lims.labDetail.LabDetailManagerImpl">
+
+			<property name="contactDetailsDAO">
+				<ref bean="ContactDetailsDAO" />
+			</property>
+		
+			<property name="labDetailsDAO">
+				<ref bean="LabDetailsDAOExtn" />
+			</property>
+		
+			<property name="limsDataModelConvertor">
+				<ref bean="LimsDataModelConvertor" />
+			</property>
+		
+			<property name="dataModelManager">
+				<ref bean="LimsDataModelManager" />
+			</property>
+		</bean>
+	
+	<bean id="LimsReferenceDataManager" class="in.wtc.lims.common.LimsReferenceDataManagerImpl">
+	
+	<property name="hospitalDAO">
+		<ref bean= "HospitalDAO"/>
+		</property>
+		
+		<property name="labDetailsDAO">
+		<ref bean= "LabDetailsDAO"/>
+		</property>
+		
+		<property name="referenceDataListDAO">
+		<ref bean= "ReferenceDataListDAO"/>
+		</property>
+		
+		<property name="labTestAttributeDAO">
+			<ref bean="LabTestAttributeDAO"/>
+		</property>
+		
+		<property name="limsDataModelManager">
+			<ref bean="LimsDataModelManager"/>
+		</property>
+		
+		<property name="labSpecimenDAO">
+			<ref bean="LabSpecimenDAO"/>
+		</property>
+		
+		<property name="labTechniqueReagentDAO">
+			<ref bean="LabTechniqueReagentDAO"/>
+		</property>
+		
+		<property name="labTestDAO">
+			<ref bean="LabTestDAO" />
+		</property>
+		
+	</bean>
+	
+	<bean id="LabConfigManager" class="in.wtc.lims.configuration.LabConfigManagerImpl">
+		<property name="labTechniqueReagentDAO">
+			<ref bean="LabTechniqueReagentDAOExtn"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="LimsDataModelManager"/>
+		</property>
+		<property name="limsDataModelConvertor">
+			<ref bean="LimsDataModelConvertor"/>
+		</property>
+		<property name="testAttributeDAO">
+			<ref bean="LabTestAttributeDAOExtn"/>
+		</property>
+		<property name="labTemplateWidgetDAO">
+			<ref bean="LabTemplateWidgetDAO"/>
+		</property>
+		
+	</bean>
+	
+	<bean id="RequisitionOrderManager" class="in.wtc.lims.requisition.RequisitionOrderManagerImpl">
+		<property name="labRequisitionOrderDAO">
+			<ref bean="LabRequisitionOrderDAOExtn"/>
+		</property>
+		<property name="limsDataModelConverter">
+			<ref bean="LimsDataModelConvertor"/>
+		</property>
+		
+		<property name="assignedServicesDAO">
+			<ref bean="AssignedServicesDAOExtn"/>
+		</property>
+		<property name="serviceManager">
+			<ref bean="ServiceManager"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="LimsDataModelManager"/>
+		</property>
+		<property name="patientManager">
+			<ref bean="PatientManager"/>
+		</property>
+		
+		
+	</bean>
+	
+	<bean id="LabTestManager" class="in.wtc.lims.labTest.LabTestManagerImpl">
+		<property name="convertor">
+			<ref bean="LimsDataModelConvertor"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="LimsDataModelManager"/>
+		</property>
+		
+		<property name="serviceManager">
+			<ref bean="ServiceManager"/>
+		</property>
+		<property name="labTestDAO">
+			<ref bean="LabTestDAO"/>
+		</property>
+		<property name="testAttributeAssociationDAO">
+			<ref bean="LabTestAttributeAssociationDAOExtn"/>
+		</property>
+		<property name="testSpecimenAssociationDAO">
+			<ref bean="LabTestSpecimenAssociationDAO"/>
+		</property>
+		<property name="dataModelConverter">
+			<ref bean="LimsDataModelConvertor"/>
+		</property>
+		<property name="patientTestDetailDAO">
+			<ref bean="LabPatientTestDetailDAO"/>
+		</property>
+		<property name="patientTestAttrValueDAO">
+			<ref bean="LabPatientTestAttributeValueDAO"/>
+		</property>
+		<property name="patientTestChangeHistoryDAO">
+			<ref bean="LabPatientTestChangeHistoryDAOExtn"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="coreDataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+		<property name="testTemplateManager">
+			<ref bean="TestTemplateManager"/>
+		</property>
+		<property name="assignedServicesDAO">
+			<ref bean="AssignedServicesDAO"/>
+		</property>
+		
+	</bean>
+	<bean id="TestTemplateManager" class="in.wtc.lims.template.TestTemplateManagerImpl">
+		<property name="templateWidgetDAO">
+			<ref bean="LabTemplateWidgetDAOExtn"/>
+		</property>
+		<property name="dataModelConverter">
+			<ref bean="LimsDataModelConvertor"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="LimsDataModelManager"/>
+		</property>
+		<property name="testTemplateDAO">
+			<ref bean="LabTestTemplateDAO"/>
+		</property>
+		<property name="testDAO">
+			<ref bean="LabTestDAO"/>
+		</property>
+		<property name="testTemplateDetailDAO">
+			<ref bean="LabTestTemplateDetailDAO"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="patientManager">
+			<ref bean="PatientManager"/>
+		</property>
+		<property name="doctorManager">
+			<ref bean="DoctorManager"/>
+		</property>
+		<property name="patientTestAttrValueDAO">
+			<ref bean="LabPatientTestAttributeValueDAO"/>
+		</property>
+		<property name="testAttributeAssociationDAO">
+			<ref bean="LabTestAttributeAssociationDAOExtn"/>
+		</property>
+		
+	</bean> 
+
+	<bean id="CollectionPointManager" class="in.wtc.lims.collectionPoint.CollectionPointManagerImpl">
+		<property name="limsDataModelConvertor">
+			<ref bean="LimsDataModelConvertor"/>
+		</property>
+		<property name="contactDetailsDAO">
+			<ref bean="ContactDetailsDAO"/>
+		</property>
+		<property name="collectionPointDAO">
+			<ref bean="LabCollectionPointDAOExtn"/>
+		</property>
+		<property name="collectionPointLabAssociationDAO">
+			<ref bean="LabCollectionPointLabAssociationDAO"/>
+		</property>
+		<property name="limsDataModelManager">
+			<ref bean="LimsDataModelManager"/>
+		</property>
+		
+	</bean> 
+	 
+		 
+</beans>

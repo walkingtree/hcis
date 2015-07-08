@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" >
+
+	
+  
+	 <bean id="transactionManager"
+            class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+            <property name="sessionFactory" ref="sessionFactory" />
+      </bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true" rollback-for="AccountingException"/>
+			<tx:method name="*" rollback-for="AccountingException"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="boservices"
+			expression="execution(* in.wtc.accountant.bl.bo.*.*Manager.*(..))" />
+		
+
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="boservices" />
+		
+	</aop:config>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	
+	<bean id="DataModelManagerService"
+		class="in.wtc.accountant.bl.common.DataModelManagerImpl">
+		<property name="accountDAO">
+			<ref bean="AccountDAOExtn"/>
+		</property>
+		<property name="fnclAccountTypeDAO">
+			<ref bean="FnclAccountTypeDAOExtn"/>
+		</property>
+		<property name="bankDAO">
+			<ref bean="AcBankDAO"/>
+		</property>
+		<property name="bankBranchDAO">
+			<ref bean="AcBankBranchDAO"/>
+		</property>
+		<property name="bankBranchAccountDAO">
+			<ref bean="AcBankBranchAccountDAO"/>
+		</property>
+		<property name="pymtRcptAttrDAO">
+			<ref bean="AcPymtRcptAttrDAO"/>
+		</property>
+		<property name="adjustmentTypeDAO">
+			<ref bean="AcAdjustmentTypeDAO"/>
+		</property>
+		<property name="payableDAO">
+			<ref bean="AcPayableDAO"/>
+		</property>
+		<property name="billDAO">
+			<ref bean="AcBillDAO"/>
+		</property>
+		<property name="receivableDAO">
+			<ref bean="AcReceivableDAO"/>
+		</property>
+		<property name="pymtRcptMethodDAO">
+			<ref bean="AcPymtRcptMethodDAO"/>
+		</property>
+		<property name="adjustmentDAO">
+			<ref bean="AcAdjustmentDAO"/>
+		</property>
+		<property name="pymtRcptDAO">
+			<ref bean="AcPymtRcptDAO"/>
+		</property>
+		<property name="entityTypeDAO">
+			<ref bean="AcEntityTypeDAO"/>
+		</property>
+		<property name="fnclAccountNumberDAO">
+			<ref bean="AcFnclAccountNumberDAO"/>
+		</property>
+		<property name="depositRequestDAO">
+			<ref bean="DepositRequestDAOExtn"/>
+		</property>
+		<property name="depositAsgmDAO">
+			<ref bean="DepositAsgmDAOExtn"/>
+		</property>
+	</bean>
+
+	<bean id="DataModelConverterService"
+		class="in.wtc.accountant.bl.common.DataModelConverter">
+		<property name="fnclAccountTypeDAO">
+			<ref bean="FnclAccountTypeDAOExtn"/>
+		</property>
+		<property name="billDAO">
+			<ref bean="AcBillDAO"/>
+		</property>
+
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService"/>
+		</property>
+		
+	</bean>
+	
+	<bean id="BankBranchManager" class="in.wtc.accountant.bl.bo.bank.BankBranchManagerImpl">
+		<property name="bankDAO">
+			<ref bean="BankDAOExtn" />
+		</property>
+		<property name="bankBranchDAO">
+			<ref bean="BankBranchDAOExtn" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+	
+	</bean>
+	
+	<bean id="AccountManagerBL" class="in.wtc.accountant.bl.bo.account.AccountManagerImpl">
+		<property name="accountDAO">
+			<ref bean="AccountDAOExtn" />
+		</property>
+		<property name="bankBranchAccountDAO">
+			<ref bean="BankBranchAccountDAOExtn" />
+		</property>
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+	</bean>
+
+	<bean id = "FinancialAccountTypeService" class = "in.wtc.accountant.bl.bo.accounttype.FinancialAccountTypeManagerImpl" > 
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="fnclAccountTypeDAO">
+			<ref bean="FnclAccountTypeDAOExtn" />
+		</property>
+	</bean>
+	
+	<bean id = "ReceivableManagerService" class = "in.wtc.accountant.bl.bo.receivable.ReceivableManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="billDAO">
+			<ref bean="AcBillDAO" />
+		</property>
+		<property name="receivableDAO">
+			<ref bean="ReceivableDAOExtn" />
+		</property>
+	</bean>
+	
+	<bean id = "PayableManagerService" class = "in.wtc.accountant.bl.bo.payabale.PayableManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="billDAO">
+			<ref bean="AcBillDAO" />
+		</property>
+		<property name="payableDAO">
+			<ref bean="PayableDAOExtn" />
+		</property>
+	</bean>
+	
+	<bean id = "JournalizationManagerServices" class = "in.wtc.accountant.bl.bo.accounttype.JournalizationManagerImpl" >
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="genlJrnlDAO">
+			<ref bean="AcGenlJrnlDAO" />
+		</property>
+	</bean>
+	
+	
+	<bean id = "PayableReceivableCommons" class = "in.wtc.accountant.bl.bo.payabale.PayableReceivableCommons" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="receivableDAO">
+			<ref bean="AcReceivableDAO" />
+		</property>
+		<property name="payableDAO">
+			<ref bean="AcPayableDAO" />
+		</property>
+		<property name="pymtRcptDAO">
+			<ref bean="AcPymtRcptDAO" />
+		</property>
+		<property name="adjustmentDAO">
+			<ref bean="AcAdjustmentDAO" />
+		</property>
+		<property name="payableAsgmDAO">
+			<ref bean="AcPayableAsgmDAO" />
+		</property>
+		<property name="receivableAsgmDAO">
+			<ref bean="AcReceivableAsgmDAO" />
+		</property>
+	</bean>
+	
+	<bean id = "PaymentManagerService" class = "in.wtc.accountant.bl.bo.payment.PaymentManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="payableDAO">
+			<ref bean="PayableDAOExtn" />
+		</property>
+		<property name="pymtRcptDAO">
+			<ref bean="PymtRcptDAOExtn" />
+		</property>
+		<property name="pymtRcptDetailsDAO">
+			<ref bean="AcPymtRcptDetailsDAO" />
+		</property>
+		<property name="pymtRcptAttrDetailsDAO">
+			<ref bean="AcPymtRcptAttrDetailsDAO" />
+		</property>
+		<property name="payableAsgmDAO">
+			<ref bean="AcPayableAsgmDAO" />
+		</property>
+		<property name="journalizationManager">
+			<ref bean="JournalizationManagerServices" />
+		</property>
+		<property name="payableReceivableCommons">
+			<ref bean="PayableReceivableCommons" />
+		</property>
+	</bean>
+	
+		
+	<bean id = "ReceiptManagerService" class = "in.wtc.accountant.bl.bo.receipt.ReceiptManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="receivableDAO">
+			<ref bean="ReceivableDAOExtn" />
+		</property>
+		<property name="pymtRcptDAO">
+			<ref bean="PymtRcptDAOExtn" />
+		</property>
+		<property name="pymtRcptDetailsDAO">
+			<ref bean="AcPymtRcptDetailsDAO" />
+		</property>
+		<property name="pymtRcptAttrDetailsDAO">
+			<ref bean="AcPymtRcptAttrDetailsDAO" />
+		</property>
+		<property name="rcptAsgmDAO">
+			<ref bean="AcReceivableAsgmDAO" />
+		</property>
+		<property name="journalizationManager">
+			<ref bean="JournalizationManagerServices" />
+		</property>
+		<property name="payableReceivableCommons">
+			<ref bean="PayableReceivableCommons" />
+		</property>
+	</bean>
+	
+	<bean id = "AdjustmentTypeManagerService" class = "in.wtc.accountant.bl.bo.adjustment.AdjustmentTypeManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="adjustmentTypeDAO">
+			<ref bean="AdjustmentTypeDAOExtn" />
+		</property>
+	</bean>
+	
+	<bean id = "AdjustmentManagerService" class = "in.wtc.accountant.bl.bo.adjustment.AdjustmentManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="adjustmentDAO">
+			<ref bean="AdjustmentDAOExtn" />
+		</property>
+		<property name="journalizationManager">
+			<ref bean="JournalizationManagerServices" />
+		</property>
+		<property name="payableReceivableCommons">
+			<ref bean="PayableReceivableCommons" />
+		</property>
+		<property name="payableDAO">
+			<ref bean="PayableDAOExtn" />
+		</property>
+		<property name="receivableDAO">
+			<ref bean="ReceivableDAOExtn" />
+		</property>		
+	</bean>
+	
+	<bean id="FinancialAccountTypeManager" class="in.wtc.accountant.bl.bo.accounttype.FinancialAccountTypeManagerImpl">
+		<property name="fnclAccountTypeDAO">
+			<ref bean="FnclAccountTypeDAOExtn" />
+		</property>
+		<property name="converter" ref="DataModelConverterService"></property>
+		<property name="dataModelManager" ref="DataModelManagerService"></property>
+	</bean>
+	<bean id="FnclAccountNumberManager" class="in.wtc.accountant.bl.bo.accounttype.FnclAccountNumberManagerImpl">
+		<property name="fnclAccountNumberDAO">
+			<ref bean="FnclAccountNumberDAOExtn" />
+		</property>
+		<property name="converter" ref="DataModelConverterService"></property>
+		<property name="dataModelManager" ref="DataModelManagerService"></property>
+	</bean>
+	
+	<bean id="AdjustmentTypeManager" class="in.wtc.accountant.bl.bo.adjustment.AdjustmentTypeManagerImpl">
+		<property name="converter" ref="DataModelConverterService"></property>
+		<property name="dataModelManager" ref="DataModelManagerService"></property>
+		<property name="adjustmentTypeDAO" ref="AdjustmentTypeDAOExtn"></property>
+	</bean>
+    
+	<bean id = "DepositManagerService" class = "in.wtc.accountant.bl.bo.deposits.DepositManagerImpl" >
+		<property name="converter">
+			<ref bean="DataModelConverterService" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>
+		<property name="depositRequestDAO">
+			<ref bean="DepositRequestDAOExtn" />
+		</property>
+		<property name="depositAsgmDAO">
+			<ref bean="DepositAsgmDAOExtn" />
+		</property>
+		<property name="pymtRcptDAO">
+			<ref bean="PymtRcptDAOExtn" />
+		</property>
+		<property name="depositRefundDAO">
+			<ref bean="AcDepositRefundDAO" />
+		</property>
+		<property name="interestAppliedDAO">
+			<ref bean="AcInterestAppliedDAO" />
+		</property>	
+		<property name="adjustmentManager">
+			<ref bean="AdjustmentManagerService" />
+		</property>	
+	</bean>
+
+	<bean id = "AcctBillManager" class = "in.wtc.accountant.bl.bo.billing.AcctBillManagerImpl" >
+		<property name="pymtRcptDAO">
+			<ref bean="PymtRcptDAOExtn" />
+		</property>
+		<property name="adjustmentDAO">
+			<ref bean="AdjustmentDAOExtn" />
+		</property>
+		<property name="accountDAO">
+			<ref bean="AcAccountDAO" />
+		</property>
+		<property name="acBillDAO">
+			<ref bean="AcBillDAO" />
+		</property>
+		<property name="receivableDAO">
+			<ref bean="ReceivableDAOExtn" />
+		</property>
+		<property name="payableReceivableCommons">
+			<ref bean="PayableReceivableCommons" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManagerService" />
+		</property>	
+		<property name="receivableManager">
+			<ref bean="ReceivableManagerService" />
+		</property>	
+	</bean>
+	
+	<!-- Bean to provide application context for whole application -->
+	<bean id="AcctAppContextProvider" class="in.wtc.accountant.bl.bo.context.AcctAppContextProvider"></bean>
+</beans>

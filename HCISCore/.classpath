@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISCoreModel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISCoreDA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBillingBM"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_AOP"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_PERSISTENCE_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_PERSISTENCE_JDBC"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_PERSISTENCE_JDO"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_PERSISTENCE_IBATIS"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_REMOTING"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_SUPPORT"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_TESTING"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_WEB"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_J2EE"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/asm.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/asm-commons-2.2.3.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/asm-util-2.2.3.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/aspectjlib.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/commons-attributes-api.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/commons-attributes-compiler.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/commons-dbcp-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/ehcache-1.2.3.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/jaas.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/javassist.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/jaxen-1.1-beta-7.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/jboss-archive-browsing.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/jta.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/mysql-connector-java-3.0.17-ga-bin.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/persistence.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-agent.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-aop.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-aspects.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-beans.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-context.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-core.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-jdbc.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-orm.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-tomcat-weaver.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/spring-tx.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/xerces-2.6.2.jar"/>
+	<classpathentry kind="lib" path="/HCISCoreDA/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/castor-1.3-codegen.jar"/>
+	<classpathentry kind="lib" path="lib/castor-1.3-core.jar"/>
+	<classpathentry kind="lib" path="lib/castor-1.3-xml.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ReportsManagerBL"/>
+	<classpathentry kind="lib" path="lib/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-api-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-xjc-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-9.jar"/>
+	<classpathentry kind="lib" path="lib/jaxws-api-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jsf-api.jar"/>
+	<classpathentry kind="lib" path="lib/jsf-impl.jar"/>
+	<classpathentry kind="lib" path="lib/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/saaj-api-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/saaj-impl-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_JAXB2"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_XMLBEANS"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_HTTP_CLIENT"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_SECURITY"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_MISC"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EagleWebServicesIntegration"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v6.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.utility"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_17">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/spring-1.2.6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

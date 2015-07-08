@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="sub_OPDRegister"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="250"
+		 pageHeight="20"
+		 columnWidth="250"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="patientId" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="contactType" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT
+     contact_details.`ADDRESS_LINE2` AS contact_details_ADDRESS_LINE2,
+     contact_details.`CITY` AS contact_details_CITY,
+     contact_details.`COUNTRY_CODE` AS contact_details_COUNTRY_CODE,
+     contact_details.`STATE_CODE` AS contact_details_STATE_CODE,
+     contact_details.`CONTACT_NUMBER` AS contact_details_CONTACT_NUMBER,
+     contact_details.`MOBILE_NUMBER` AS contact_details_MOBILE_NUMBER
+FROM
+     `entity_contact_code` entity_contact_code INNER JOIN 
+					     `contact_details` contact_details ON
+								 contact_details.`CONTACT_CODE` = entity_contact_code.`CONTACT_CODE`
+WHERE 
+
+entity_contact_code.`PERSONEL_ID` = $P{patientId} AND
+entity_contact_code.`CONTACT_TYPE_IND` = $P{contactType}]]></queryString>
+
+	<field name="contact_details_ADDRESS_LINE2" class="java.lang.String"/>
+	<field name="contact_details_CITY" class="java.lang.String"/>
+	<field name="contact_details_COUNTRY_CODE" class="java.lang.String"/>
+	<field name="contact_details_STATE_CODE" class="java.lang.String"/>
+	<field name="contact_details_CONTACT_NUMBER" class="java.lang.String"/>
+	<field name="contact_details_MOBILE_NUMBER" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="111"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{contact_details_ADDRESS_LINE2}== null|| $F{contact_details_ADDRESS_LINE2}.equals("")) ? "" : $F{contact_details_ADDRESS_LINE2} +" ," +($F{contact_details_CITY}== null ? "" :$F{contact_details_CITY})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="111"
+						y="0"
+						width="64"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contact_details_CONTACT_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="175"
+						y="0"
+						width="74"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contact_details_MOBILE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

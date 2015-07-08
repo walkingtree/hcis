@@ -1,0 +1,46 @@
+.day_view_icon {
+	background-image: url(images/calendar_view_day.png) !important;
+}
+.week_view_icon {
+	background-image: url(images/calendar_view_week.png) !important;
+}
+.month_view_icon {
+	background-image: url(images/calendar_view_month.png) !important;
+}
+.calendar_icon {
+	background-image: url(images/cms_calendar.png) !important;
+}
+.date_next_icon {
+	background-image: url(images/date_next.png) !important;
+}
+.date_previous_icon {
+	background-image: url(images/date_previous.png) !important;
+}
+
+.calendar-grid .x-grid3-row {
+	cursor: default;
+    border:1px solid #ededed;
+    border-top-color:#fff;
+    /*border-bottom: 1px solid #ededed;*/
+    width:100%;
+    height: 60px;
+}
+
+.calendar-grid .x-grid3-cell-inner, .x-grid3-hd-inner {
+overflow:hidden;
+white-space:nowrap;
+}
+
+.calendar-grid .x-grid-with-col-lines {
+}
+
+.st-dtitle {
+background-color:#E8EEF7;
+border-left:1px solid #C3D9FF;
+border-top:1px solid #C3D9FF;
+color:#444444;
+padding-right: 2px;
+line-height:16px;
+overflow:hidden;
+text-align:right;
+}

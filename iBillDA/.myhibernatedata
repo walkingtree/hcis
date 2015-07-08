@@ -1,0 +1,22 @@
+#
+#Fri Oct 30 18:06:54 IST 2009
+genBasicCompId=true
+sessionFactoryName=
+profile=
+daoSFId=sessionFactory
+version=3.2
+jndiPath=
+detectM2M=true
+reStrategyClass=
+springDaoFile=src/applicationContext.xml
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=/lib
+addLibs2Project=true
+genVersionTag=true
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+reSettingsFile=
+configFile=/iBillDA/src/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true

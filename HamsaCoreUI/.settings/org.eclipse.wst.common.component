@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="HamsaUI">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="InpatientDA.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/InpatientDA/InpatientDA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="UserManager.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/UserManager/UserManager">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="iBillingBM.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iBillingBM/iBillingBM">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="UserManagerBL.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/UserManagerBL/UserManagerBL">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="iBillDA.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iBillDA/iBillDA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="UserManagerModels.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/UserManagerModels/UserManagerModels">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="EagleWebServicesIntegration.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/EagleWebServicesIntegration/EagleWebServicesIntegration">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="HCISCore.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/HCISCore/HCISCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="HCISCoreModel.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/HCISCoreModel/HCISCoreModel">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="UserManagerDA.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/UserManagerDA/UserManagerDA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ProcessInterface.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ProcessInterface/ProcessInterface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="InpatientManagement.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/InpatientManagement/InpatientManagement">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ReportsManagerBL.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ReportsManagerBL/ReportsManagerBL">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="iBill.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/iBill/iBill">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="HCISBillingProcesses.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/HCISBillingProcesses/HCISBillingProcesses">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="HCISCoreDA.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/HCISCoreDA/HCISCoreDA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="LIMSModel.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/LIMSModel/LIMSModel">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="LIMS.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/LIMS/LIMS">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="HamsaUI"/>
+        <property name="java-output-path"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="DataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://192.168.1.50:3306/hcisit">
+		</property>
+		<property name="username" value="hcis"></property>
+		<property name="password" value="nirvikulp"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="DataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+			<value>
+					in/wtc/accountant/da/AcFnclAccountNumber.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcBankBranchAccount.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcPymtRcpt.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcBank.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptMethod.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcEntityType.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcCurrency.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcBankBranch.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcInterestApplied.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcDepositRefund.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcPayable.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcFnclAccountType.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcPayableAsgm.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcRcvblInterest.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcPayableInterest.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcCust.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcVendor.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcAdjustment.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptAttrDetails.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcGenlJrnl.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptDetails.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcBill.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptAttr.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcDepositAsgm.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcReceivable.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcDepositRequest.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcAdjustmentType.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcReceivableAsgm.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcAccount.hbm.xml</value>
+				<value>
+					com/wtc/hcis/billing/da/BillItemDetails.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/BillProcessEvent.hbm.xml
+				</value>
+				<value>com/wtc/hcis/billing/da/BillInfo.hbm.xml</value>
+				<value>
+					com/wtc/hcis/billing/da/BillSetting.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/FnclTrnsctSummary.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/BillActivity.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/FnclChargeType.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/BillRegister.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/BillActivityDetails.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/FnclCharge.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/BillAccount.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/billing/da/BillProcessRouting.hbm.xml
+				</value></list>
+		</property></bean>
+		<bean id="AcFnclAccountNumberDAO"
+		class="in.wtc.accountant.da.AcFnclAccountNumberDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBankBranchAccountDAO"
+		class="in.wtc.accountant.da.AcBankBranchAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptDAO"
+		class="in.wtc.accountant.da.AcPymtRcptDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBankDAO" class="in.wtc.accountant.da.AcBankDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptMethodDAO"
+		class="in.wtc.accountant.da.AcPymtRcptMethodDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcEntityTypeDAO"
+		class="in.wtc.accountant.da.AcEntityTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcCurrencyDAO"
+		class="in.wtc.accountant.da.AcCurrencyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBankBranchDAO"
+		class="in.wtc.accountant.da.AcBankBranchDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcInterestAppliedDAO"
+		class="in.wtc.accountant.da.AcInterestAppliedDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcDepositRefundDAO"
+		class="in.wtc.accountant.da.AcDepositRefundDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPayableDAO" class="in.wtc.accountant.da.AcPayableDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcFnclAccountTypeDAO"
+		class="in.wtc.accountant.da.AcFnclAccountTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPayableAsgmDAO"
+		class="in.wtc.accountant.da.AcPayableAsgmDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcRcvblInterestDAO"
+		class="in.wtc.accountant.da.AcRcvblInterestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPayableInterestDAO"
+		class="in.wtc.accountant.da.AcPayableInterestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcCustDAO" class="in.wtc.accountant.da.AcCustDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcVendorDAO" class="in.wtc.accountant.da.AcVendorDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcAdjustmentDAO"
+		class="in.wtc.accountant.da.AcAdjustmentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptAttrDetailsDAO"
+		class="in.wtc.accountant.da.AcPymtRcptAttrDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcGenlJrnlDAO"
+		class="in.wtc.accountant.da.AcGenlJrnlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptDetailsDAO"
+		class="in.wtc.accountant.da.AcPymtRcptDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBillDAO" class="in.wtc.accountant.da.AcBillDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptAttrDAO"
+		class="in.wtc.accountant.da.AcPymtRcptAttrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcDepositAsgmDAO"
+		class="in.wtc.accountant.da.AcDepositAsgmDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcReceivableDAO"
+		class="in.wtc.accountant.da.AcReceivableDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcDepositRequestDAO"
+		class="in.wtc.accountant.da.AcDepositRequestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcAdjustmentTypeDAO"
+		class="in.wtc.accountant.da.AcAdjustmentTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcReceivableAsgmDAO"
+		class="in.wtc.accountant.da.AcReceivableAsgmDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcAccountDAO" class="in.wtc.accountant.da.AcAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AccountDAOExtn" class="in.wtc.accountant.da.extn.AccountDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdjustmentDAOExtn" class="in.wtc.accountant.da.extn.AdjustmentDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BankBranchAccountDAOExtn" class="in.wtc.accountant.da.extn.BankBranchAccountDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdjustmentTypeDAOExtn" class="in.wtc.accountant.da.extn.AdjustmentTypeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BankBranchDAOExtn" class="in.wtc.accountant.da.extn.BankBranchDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BankDAOExtn" class="in.wtc.accountant.da.extn.BankDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="FnclAccountNumberDAOExtn" class="in.wtc.accountant.da.extn.FnclAccountNumberDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+		<bean id="FnclAccountTypeDAOExtn" class="in.wtc.accountant.da.extn.FnclAccountTypeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		</bean>
+		<bean id="PayableDAOExtn" class="in.wtc.accountant.da.extn.PayableDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		</bean>
+		<bean id="PymtRcptDAOExtn" class="in.wtc.accountant.da.extn.PymtRcptDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean>
+		<bean id="ReceivableDAOExtn" class="in.wtc.accountant.da.extn.ReceivableDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean>
+		<bean id="DepositRequestDAOExtn" class="in.wtc.accountant.da.extn.DepositRequestDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean><bean id="DepositAsgmDAOExtn" class="in.wtc.accountant.da.extn.DepositAsgmDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean>
+			
+	<bean id="BillItemDetailsDAO"
+		class="com.wtc.hcis.billing.da.BillItemDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillProcessEventDAO"
+		class="com.wtc.hcis.billing.da.BillProcessEventDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillInfoDAO"
+		class="com.wtc.hcis.billing.da.BillInfoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillSettingDAO"
+		class="com.wtc.hcis.billing.da.BillSettingDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FnclTrnsctSummaryDAO"
+		class="com.wtc.hcis.billing.da.FnclTrnsctSummaryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillActivityDAO"
+		class="com.wtc.hcis.billing.da.BillActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FnclChargeTypeDAO"
+		class="com.wtc.hcis.billing.da.FnclChargeTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillRegisterDAO"
+		class="com.wtc.hcis.billing.da.BillRegisterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillActivityDetailsDAO"
+		class="com.wtc.hcis.billing.da.BillActivityDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FnclChargeDAO"
+		class="com.wtc.hcis.billing.da.FnclChargeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillAccountDAO"
+		class="com.wtc.hcis.billing.da.BillAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="BillItemDetailsDAOExtn" class="com.wtc.hcis.billing.da.extn.BillItemDetailsDAOExtn" parent="BillItemDetailsDAO">
+		<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+		</property>
+	</bean>		
+	
+	<bean id="FnclChargeTypeDAOExtn" class="com.wtc.hcis.billing.da.extn.FnclChargeTypeDAOExtn" parent="FnclChargeTypeDAO">
+		<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+		</property>
+	</bean>		
+
+	<bean id="BillRegisterDAOExtn" class="com.wtc.hcis.billing.da.extn.BillRegisterDAOExtn" parent="BillRegisterDAO">
+		<property name="sessionFactory">
+				<ref bean="sessionFactory"/>
+		</property>
+	</bean>		
+	<bean id="BillProcessRoutingDAO"
+		class="com.wtc.hcis.billing.da.BillProcessRoutingDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BillProcessRoutingDAOExtn"
+		class="com.wtc.hcis.billing.da.extn.BillProcessRoutingDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	</beans>

@@ -1,0 +1,378 @@
+.imageText {
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.x-tab-panel-header,.x-tab-panel-footer {
+	background: none;
+}
+
+ul.x-tab-strip-top {
+	background: none;
+	padding-top: 0px;
+}
+
+.x-tab-panel-header {
+	border: none;
+}
+
+.defaultCellCls {
+	padding: 5px;
+}
+
+.search_btn {
+	background-image: url(../images/find.png) !important;
+}
+
+.print_btn {
+	background-image: url(../images/printer.png) !important;
+}
+
+.save_btn {
+	background-image: url(../images/disk.png) !important;
+}
+
+.cancel_btn {
+	background-image: url(../images/arrow_undo.png) !important;
+}
+
+.cross_icon {
+	background-image: url(../images/cancel.png) !important;
+}
+
+.add_btn {
+	background-image: url(../images/add.png) !important;
+}
+
+.edit_btn {
+	background-image: url(../images/pencil.png) !important;
+}
+
+.delete_btn {
+	background-image: url(../images/delete.png) !important;
+}
+
+.home-icon {
+	background-image: url(../images/house.png) !important;
+}
+
+.dashboard-icon {
+	background-image: url(../images/chart_curve.png) !important;
+}
+
+.report-icon {
+	background-image: url(../images/report.png) !important;
+}
+
+.setting-icon {
+	background-image: url(../images/wrench_orange.png) !important;
+}
+
+.help-icon {
+	background-image: url(../images/help.png) !important;
+}
+
+.roster-icon {
+	background-image: url(../images/date_go.png) !important;
+}
+
+.newevent-icon {
+	background-image: url(../images/tag_blue_add.png) !important;
+}
+
+.editevent-icon {
+	background-image: url(../images/tag_blue_edit.png) !important;
+}
+
+.accept-icon {
+	background-image: url(../images/accept.png) !important;
+}
+
+.reset-icon {
+	background-image: url(../images/arrow_undo.png) !important;
+}
+
+.vcard-icon {
+	background-image: url(../images/vcard.png) !important;
+}
+
+.sla-icon {
+	background-image: url(../images/clock.png) !important;
+}
+
+.insurer-icon {
+	background-image: url(../images/book.png) !important;
+}
+
+.view-icon {
+	background-image: url(../images/zoom.png) !important;
+}
+
+.info-icon {
+	background-image: url(../images/info.png) !important;
+}
+
+.approve-icon {
+	background-image: url(../images/approve.PNG) !important;
+}
+
+.partapprove-icon {
+	background-image: url(../images/partapprove.PNG) !important;
+}
+
+.resubmit-icon {
+	background-image: url(../images/resubmit.PNG) !important;
+}
+
+.pdf-icon {
+	background-image: url(../images/page_white_acrobat.png) !important;
+}
+
+.money-icon {
+	background-image: url(../images/money.png) !important;
+}
+
+.money-add-icon {
+	background-image: url(../images/money_add.png) !important;
+}
+
+.user-add-icon {
+	background-image: url(../images/user_add.png) !important;
+}
+.bed-transfer-icon {
+	background-image: url(../images/user_add.png) !important;
+}
+
+.login-icon {
+	background-image: url(../images/lock.png) !important;
+}
+
+.logout-icon {
+	background-image: url(../images/lock_open.png) !important;
+}
+
+.bill-icon {
+	background-image: url(../images/script.png) !important;
+}
+
+.bottom-arrow-icon {
+	background-image: url(../images/bottom2.gif) !important;
+}
+
+.collapse-all{
+	background-image: url(../images/collapse-all.gif) !important;
+}
+
+.expand-all{
+	background-image: url(../images/expand-all.gif) !important;
+}
+
+.discharge-icon{
+	background-image: url(../images/discharge.png) !important;
+}
+.claim-icon{
+	background-image: url(../images/claimRequest.png) !important;
+}
+.icon-error{
+	background-image: url(../images/icon-error.gif) !important;
+	background-repeat: no-repeat;
+	margin:0px;
+	padding:0px;
+}
+
+.label-font {
+	font-size:12px;
+}
+.bedlegend-occupied {
+	background: #FFFF33;
+	border: 1px solid #FFFF33;
+}
+
+.bedlegend-available {
+	background: #99FF00;
+	border: 1px solid #99FF00;
+}
+
+.bedlegend-defective {
+	background: #FF3300;
+	border: 1px solid #FF3300;
+}
+
+.bedlegend-cleaning {
+	background: #99FFCC;
+	border: 1px solid #99FFCC;
+}
+
+.bedlegend-pendingcleaning {
+	background: #3399FF;
+	border: 1px solid #3399FF;
+}
+.bedlegend-retried {
+	background: #C0C0C0;
+	border: 1px solid #C0C0C0;
+}
+
+.activity-log-view {
+	float: left;
+	overflow: hidden;
+	display: block;
+	padding-top: 10px;
+	font-size: 12px;
+	width: 100%;
+}
+
+.x-form-file-wrap {
+	height: 22px;
+	position: relative;
+}
+
+.x-form-file-wrap .x-form-file {
+	height: 22px;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	z-index: 2;
+}
+
+.x-form-file-wrap .x-form-file-btn {
+	position: absolute;
+	right: 0;
+	z-index: 1;
+}
+
+.x-form-file-wrap .x-form-file-text {
+	color: #777777;
+	left: 0;
+	position: absolute;
+	z-index: 3;
+}
+
+#progressBar {
+	padding-top: 5px;
+}
+
+#progressBarBox {
+	width: 350px;
+	height: 20px;
+	border: 1px insert;
+	background: #eee;
+}
+
+#progressBarBoxContent {
+	width: 0;
+	height: 20px;
+	border-right: 1px solid #444;
+	background: #9ACB34;
+}
+
+.disapprove-icon {
+	background-image: url(../images/disapprove.PNG) !important;
+}
+
+
+.left_arrow_icon {
+	background-image: url(../images/left2.gif) !important;
+}
+
+.right_arrow_icon {
+	background-image: url(../images/right2.gif) !important;
+}
+
+.print-preview-icon{
+	background-image: url(../images/print-preview-icon.png) !important;
+}
+
+
+/* Printing related cls*/
+
+.x-form-display-only-field {
+	background: transparent;
+	border: 1px solid transparent;
+	cursor: pointer;
+	overflow: hidden;
+	cursor:default;
+	color:inherit; /* Just so you can see the difference more clearly */
+	border-style: none;
+	border-top: none;
+}
+.x-form-display-only-field-special {
+	background: transparent;
+	border: 1px solid transparent;
+	cursor: pointer;
+	overflow: hidden;
+	font-weight:bold;
+	cursor:default;
+	color:red;
+	border-top: none; 
+}
+
+.textfield-displayonly {
+	background: transparent;
+	font-family : "lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size: 12px;
+	border: none;
+	padding-top:3px;
+	color: inherit;
+	border-style: none;
+	border-top: none;
+}
+.textarea-displayonly {
+	background: transparent;
+	font-family : "lucida grande",tahoma,verdana,arial,sans-serif;
+	border: none;
+	font-size: 11px;
+	color: inherit;
+	-moz-opacity: 1;
+	opacity: 1;
+	margin-top:0px;
+	padding-top:3px;
+	filter: alpha(opacity =   100);
+}
+.print-cls {
+  display: none;
+}
+
+.x-panel-body{
+	border-style: none
+}
+
+.x-form-display-only-fieldset {
+	background: transparent;
+	cursor: pointer;
+	overflow: hidden;
+	cursor:default;
+	color:inherit; /* Just so you can see the difference more clearly */
+}
+
+.top {vertical-align:top;}
+
+.middle{vertical-align:middle;}
+
+.bottom {vertical-align:bottom;}
+
+.gadget-description {
+	font-size : 12px;
+	font-style : normal;
+	font-weight: normal;
+}
+
+.gadget-title {
+	font-size : 14px;
+	font-style : normal;
+	font-weight: bold;
+	color :  #FF00FF
+}
+
+.d-gadget{
+	background-color :#00CCFF	
+}
+
+.change-surgery-status{
+	background-image: url(../images/surgeryStatus.png) !important;
+}
+
+.change-booking-status{
+	background-image: url(../images/bookingStatus.png) !important;
+}
+

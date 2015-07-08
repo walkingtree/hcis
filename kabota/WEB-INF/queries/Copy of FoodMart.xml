@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<Schema name="FoodMart">
+
+<!-- Cubes for HaMSa  -->
+<Cube name="appointment">
+   <Table name="appointments"/>
+
+<Dimension name="Date" foreignKey="DATE_DIM_ID">
+	<Hierarchy hasAll="true" allMemberName="All Dates" primaryKey="DATE_ID">
+		<Table name="DATE_DIM"/>
+			<Level name="YEAR" column="YEAR" type="Integer" uniqueMembers="false"/>
+
+<!-- Here nameColum is used to take date from "MONTH" column, and month name from "MONTH_NAME"
+in this way we get MonthName in sorted order -->
+			<Level name="MONTH" column="MONTH" nameColumn="MONTH_NAME" uniqueMembers="false"/>
+
+			<Level name="DAY OF MONTH" column="DAY_OF_MONTH" type="Integer" uniqueMembers="false"/>
+	</Hierarchy>
+</Dimension>
+
+   <Dimension name="Doctor" foreignKey="DOCTOR_ID">
+     <Hierarchy hasAll="true" allMemberName="All Doctors" primaryKey="DOCTOR_ID">
+	<Table name="DOCTOR"/>
+		<Level name="Doctor" column="FULL_NAME" uniqueMembers="false"/>
+		<Level name="Doctor ID" column="DOCTOR_ID" uniqueMembers="false"/>
+	</Hierarchy>
+   </Dimension>
+
+<Dimension name="Patient" foreignKey="patient_PATIENT_ID">
+     <Hierarchy hasAll="true" allMemberName="All patients" primaryKey="PATIENT_ID">
+
+
+<Query>
+        <SQL dialect="generic">
+SELECT
+     patient.`PATIENT_ID` AS patient_PATIENT_ID,
+     contact_details.`CITY` AS contact_details_CITY,
+     contact_details.`COUNTRY_CODE` AS contact_details_COUNTRY_CODE,
+     contact_details.`STATE_CODE` AS contact_details_STATE_CODE,
+     state.`COUNTRY_CODE` AS state_COUNTRY_CODE,
+     state.`DESCRIPTION` AS state_DESCRIPTION,
+     country.`COUNTRY_CODE` AS country_COUNTRY_CODE,
+     country.`DESCRIPTION` AS country_DESCRIPTION,
+     patient.`FULL_NAME` AS patient_FULL_NAME,
+     entity_contact_code.`CONTACT_TYPE_IND` AS entity_contact_code_CONTACT_TYPE_IND,
+     patient.`GENDER_CODE` AS patient_GENDER_CODE,
+     contact_details.`ADDRESS_LINE2` AS contact_details_ADDRESS_LINE2,
+     contact_details.`CONTACT_NUMBER` AS contact_details_CONTACT_NUMBER,
+     contact_details.`MOBILE_NUMBER` AS contact_details_MOBILE_NUMBER
+FROM
+     `entity_contact_code` entity_contact_code LEFT OUTER JOIN `patient` patient ON entity_contact_code.`PERSONEL_ID` = patient.`PATIENT_ID`
+     INNER JOIN `contact_details` contact_details ON entity_contact_code.`CONTACT_CODE` = contact_details.`CONTACT_CODE`
+     LEFT OUTER JOIN `state` state ON contact_details.`COUNTRY_CODE` = state.`COUNTRY_CODE`
+     AND state.`STATE_CODE` = contact_details.`STATE_CODE`
+     LEFT OUTER JOIN `country` country ON contact_details.`COUNTRY_CODE` = country.`COUNTRY_CODE`
+WHERE
+     entity_contact_code.`CONTACT_TYPE_IND` = 'CURRENT'
+ AND entity_contact_code.`FOR_ENTITY_CODE` = 'PATIENT'
+        </SQL>
+      </Query>
+
+
+	<Level name="PatientId" column="patient_PATIENT_ID" uniqueMembers="false"/>
+	<Level name="City" column="contact_details_CITY" uniqueMembers="false"/>
+      <Level name="State" column="contact_details_STATE_CODE" uniqueMembers="false"/>
+      <Level name="Country" column="state_DESCRIPTION" uniqueMembers="false"/>      
+      </Hierarchy>
+  </Dimension>
+
+ 
+<Measure name="Total" column="APPOINTMENT_NUMBER" aggregator="count" formatString="#,###">
+   </Measure>
+
+</Cube>
+</Schema>

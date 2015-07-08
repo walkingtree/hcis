@@ -1,0 +1,21 @@
+from  Insurer as insurer left join insurer.sponsorInsurerAssociations as sia, ContactDetails as contact where insurer.contactCode = contact.contactCode 
+##
+#if( $Util.isValid($insurerName) == true)
+ and insurer.insurerName like '%$insurerName%' 
+#end
+##
+#if($Util.isValid($insurerDescription) == true)
+ and insurer.insurerDesc like '%$insurerDescription%' 
+#end
+##
+#if($Util.isValid($insurancePlanCd) ==true)
+ and insurer.insurancePlanses.planCd  like  '$insurancePlanCd' 
+#end
+##
+#if($Util.isValid($sponsorName) ==true)
+ and sia.id.sponsorName  like  '$sponsorName' 
+#end
+##
+#if($Util.isValid($orderBy) ==true)
+ order by  $orderBy 
+#end

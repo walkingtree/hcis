@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true" rollback-for="HCISException"/>
+			<tx:method name="*" rollback-for="HCISException"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="hcisCustomThrowsAdvice" class="in.wtc.hcis.bo.common.HCISCustomThrowsAdvice"></bean>
+	
+	<aop:config>
+		<aop:pointcut id="hcisMethods"
+			expression="execution(* in.wtc.hcis.bo.*.*Manager.*(..))" />
+		<aop:pointcut id="hcisIPMethods"
+			expression="execution(* in.wtc.hcis.ip.bo.*.*Manager.*(..))" />
+		<aop:pointcut id="userMgmtMethods"
+			expression="execution(* com.wtc.usermanager.bo.*.*Manager.*(..))" />
+			
+		<aop:pointcut id="limsMgmtMethods"
+			expression="execution(* in.wtc.lims.*.*Manager.*(..))" />
+			
+		<aop:pointcut id="otMgmtMethods"
+			expression="execution(* in.wtc.hcis.ot.bl.*.*Manager.*(..))" />
+			
+			
+		
+		<aop:advisor advice-ref="hcisCustomThrowsAdvice" pointcut-ref="hcisMethods" />
+		<aop:advisor advice-ref="hcisCustomThrowsAdvice" pointcut-ref="hcisIPMethods" />
+		<aop:advisor advice-ref="hcisCustomThrowsAdvice" pointcut-ref="userMgmtMethods" />
+		<aop:advisor advice-ref="hcisCustomThrowsAdvice" pointcut-ref="limsMgmtMethods" />
+		<aop:advisor advice-ref="hcisCustomThrowsAdvice" pointcut-ref="otMgmtMethods" />
+		
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="hcisMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="hcisIPMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userMgmtMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="limsMgmtMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="otMgmtMethods" />
+	</aop:config>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="ContactManager"
+		class="in.wtc.hcis.bo.contact.ContactManagerImpl">
+		<property name="entityContactCodeDAOExtn">
+			<ref bean="EntityContactCodeDAOExtn" />
+		</property>
+		<property name="contactDetailsDAO">
+			<ref bean="ContactDetailsDAO" />
+		</property>
+		<property name="stateDAO">
+			<ref bean="StateDAO" />
+		</property>
+		<property name="countryDAO">
+			<ref bean="CountryDAO" />
+		</property>
+		<property name="appEntitiesDAO">
+			<ref bean="AppEntitiesDAO"/>
+		</property>
+		<property name="genderDAO">
+			<ref bean="GenderDAO"/>
+		</property>
+		<property name="relationDAO">
+			<ref bean="RelationDAO"/>
+		</property>
+		<property name="saluationDAO">
+			<ref bean="SaluationDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="PatientManager"
+		class="in.wtc.hcis.bo.patient.PatientManagerImpl">
+		<property name="patientDetailsDAO">
+			<ref bean="PatientDetailsDAO" />
+		</property>
+		<property name="patientAllergiesDAO">
+			<ref bean="PatientAllergiesDAO" />
+		</property>
+		<property name="patientImmunizationDAO">
+			<ref bean="PatientImmunizationDAO" />
+		</property>
+		<property name="referralDAO">
+			<ref bean="ReferralDAO" />
+		</property>
+		<property name="allergiesDAO">
+			<ref bean="AllergiesDAO" />
+		</property>
+		<property name="immunizationDAO">
+			<ref bean="ImmunizationDAO" />
+		</property>
+		<property name="saluationDAO">
+			<ref bean="SaluationDAO" />
+		</property>
+		<property name="genderDAO">
+			<ref bean="GenderDAO" />
+		</property>
+		<property name="registrationTypeDAO">
+			<ref bean="RegistrationTypeDAO" />
+		</property>
+		<property name="registrationStatusDAO">
+			<ref bean="RegistrationStatusDAO" />
+		</property>
+		<property name="patientRatingDAO">
+			<ref bean="PatientRatingDAO" />
+		</property>
+		<property name="patientCategoryDAO">
+			<ref bean="PatientCategoryDAO" />
+		</property>
+		<property name="bloodGroupDAO">
+			<ref bean="BloodGroupDAO" />
+		</property>
+		<property name="maritalDAO">
+			<ref bean="MaritalDAO" />
+		</property>
+		<property name="religionDAO">
+			<ref bean="ReligionDAO" />
+		</property>
+		<property name="motherTongueDAO">
+			<ref bean="MotherTongueDAO" />
+		</property>
+		<property name="nationalityDAO">
+			<ref bean="NationalityDAO" />
+		</property>
+		<property name="idProofsDAO">
+			<ref bean="IdProofsDAO" />
+		</property>
+		<property name="patientDAOExtn">
+			<ref bean="PatientDAOExtn" />
+		</property>
+		<property name="contactManager">
+			<ref bean="ContactManager" />
+		</property>
+		<property name="reportManager">
+			<ref bean="ReportManager" />
+		</property>
+		<property name="referenceDataListDAO">
+			<ref bean="ReferenceDataListDAO"/>
+		</property>
+	</bean>
+
+	<bean id="DataModelManager"
+		class="in.wtc.hcis.bo.common.DataModelManagerImpl">
+		<property name="appointmentsDAO">
+			<ref bean="AppointmentsDAO" />
+		</property>
+		<property name="appointmentStatusDAO">
+			<ref bean="AppointmentStatusDAO" />
+		</property>
+		<property name="bookingTypeDAO">
+			<ref bean="BookingTypeDAO" />
+		</property>
+		<property name="doctorDAO">
+			<ref bean="DoctorDAOExtn" />
+		</property>
+		<property name="patientDAO">
+			<ref bean="PatientDAOExtn" />
+		</property>
+		<property name="rosterDAO">
+			<ref bean="RosterDAO" />
+		</property>
+		<property name="roomDAO">
+			<ref bean="RoomDAO" />
+		</property>
+		<property name="serviceGroupDAO" ref="ServiceGroupDAO"></property>
+		<property name="serviceStatusDAO" ref="ServiceStatusDAO"></property>
+
+		<property name="bloodGroupDAO">
+			<ref bean="BloodGroupDAO" />
+		</property>
+		<property name="genderDAO">
+			<ref bean="GenderDAO" />
+		</property>
+
+		<property name="departmentDAO">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="especialtyDAO">
+			<ref bean="EspecialtyDAO" />
+		</property>
+		<property name="allergiesDAO">
+			<ref bean="AllergiesDAO" />
+		</property>
+		<property name="immunizationDAO">
+			<ref bean="ImmunizationDAO" />
+		</property>
+		<property name="idProofsDAO">
+			<ref bean="IdProofsDAO" />
+		</property>
+		<property name="maritalDAO">
+			<ref bean="MaritalDAO" />
+		</property>
+		<property name="motherTongueDAO">
+			<ref bean="MotherTongueDAO" />
+		</property>
+		<property name="nationalityDAO">
+			<ref bean="NationalityDAO" />
+		</property>
+		<property name="patientCategoryDAO">
+			<ref bean="PatientCategoryDAO" />
+		</property>
+		<property name="referralDAO">
+			<ref bean="ReferralDAOExtn" />
+		</property>
+		<property name="registrationStatusDAO">
+			<ref bean="RegistrationStatusDAO" />
+		</property>
+		<property name="registrationTypeDAO">
+			<ref bean="RegistrationTypeDAO" />
+		</property>
+		<property name="relationDAO">
+			<ref bean="RelationDAO" />
+		</property>
+		<property name="religionDAO">
+			<ref bean="ReligionDAO" />
+		</property>
+		<property name="saluationDAO">
+			<ref bean="SaluationDAO" />
+		</property>
+		<property name="serviceDAO">
+			<ref bean="ServiceDAOExtn" />
+		</property>
+		<property name="countryDAO">
+			<ref bean="CountryDAO" />
+		</property>
+		<property name="stateDAO">
+			<ref bean="StateDAO" />
+		</property>
+		<property name="patientRatingDAO">
+			<ref bean="PatientRatingDAO" />
+		</property>
+		<property name="medicineTypeDAO">
+			<ref bean="MedicineTypeDAO" />
+		</property>
+		<property name="changeReasonDAO">
+			<ref bean="ChangeReasonDAO" />
+		</property>
+		<property name="brandDAO">
+			<ref bean="BrandDAO" />
+		</property>
+		<property name="statusDAO">
+			<ref bean="StatusDAO" />
+		</property>
+		<property name="appEntitiesDAO">
+			<ref bean="AppEntitiesDAO" />
+		</property>
+		<property name="medicinesDAO">
+			<ref bean="MedicinesDAO"/>
+		</property>
+		<property name="servicePackageDAO">
+			<ref bean="ServicePackageDAO"/>
+		</property>
+		<property name="servicePackageStatusDAO">
+			<ref bean="ServicePackageStatusDAO"/>
+		</property>
+		<property name="doctorEspecialtyDAO">
+			<ref bean="DoctorEspecialtyDAO"/>
+		</property>
+		<property name="diseaseDAO">
+			<ref bean="DiseaseDAO" />
+		</property>
+		<property name="referenceDataListDAO">
+			<ref bean="ReferenceDataListDAO" />
+		</property>
+		<property name="deptEspecialityAssocDAO">
+			<ref bean = "DeptEspecialityAssocDAOExtn"/>
+		</property>
+		<property name="vaccinationScheduleDAO">
+			<ref bean = "VaccinationScheduleDAO"/>
+		</property>
+		<property name="vaccinationDAO">
+			<ref bean = "VaccinationDAO"/>
+		</property>
+		<property name="entityDAO">
+			<ref bean = "EntityDAO"/>
+		</property>
+		<property name="patientVitalDAO">
+			<ref bean = "DocPatientVitalDAO"/>
+		</property>
+		<property name="vitalFieldDAO">
+			<ref bean = "DocVitalFieldDAO"/>
+		</property> 
+		<property name="checkListDAO">
+			<ref bean = "DocCheckListDAO"/>
+		</property> 
+		<property name="checkListDetailDAO">
+			<ref bean = "DocCheckListDetailDAO"/>
+		</property> 
+		<property name="checkListInstanceDAO">
+			<ref bean = "DocCheckListInstanceDAO"/>
+		</property> 
+	</bean>     
+ 
+	<bean id="DataModelConverter"
+		class="in.wtc.hcis.bo.common.DataModelConverter">
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+		<property name="referralDAO">
+			<ref bean="ReferralDAO" />
+		</property>
+		<property name="configurationManager">
+			<ref bean="ConfigurationManager" />
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager" />
+		</property>
+	</bean>
+
+	<bean id="AppointmentManager"
+		class="in.wtc.hcis.bo.appointment.AppointmentManagerImpl">
+		<property name="appointmentsDAO">
+			<ref bean="AppointmentsDAOExtn" />
+		</property>
+		<property name="converter">
+			<ref bean="DataModelConverter" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+		<property name="appointmentHistoryDAO">
+			<ref bean="AppointmentHistoryDAOExtn" />
+		</property>
+		<property name="doctorManager">
+			<ref bean="DoctorManager" />
+		</property>
+		<property name="patientManager">
+			<ref bean="PatientManager" />
+		</property>
+		<property name="reportManager">
+			<ref bean="ReportManager" />
+		</property>
+		<property name="rosterManager">
+			<ref bean="RosterManager" />
+		</property>
+		<property name="configurationManager">
+			<ref bean="ConfigurationManager" />
+		</property>
+		<property name="serviceManager">
+			<ref bean="ServiceManager" />
+		</property>
+	</bean>
+
+
+	<bean id="RegistrationManager"
+		class="in.wtc.hcis.bo.registration.RegistrationManagerImpl">
+		<property name="patientDetailsDAO">
+			<ref bean="PatientDetailsDAO" />
+		</property>
+		<property name="patientAllergiesDAO">
+			<ref bean="PatientAllergiesDAO" />
+		</property>
+		<property name="patientImmunizationDAO">
+			<ref bean="PatientImmunizationDAO" />
+		</property>
+		<property name="referralDAO">
+			<ref bean="ReferralDAO" />
+		</property>
+		<property name="allergiesDAO">
+			<ref bean="AllergiesDAO" />
+		</property>
+		<property name="immunizationDAO">
+			<ref bean="ImmunizationDAO" />
+		</property>
+		<property name="saluationDAO">
+			<ref bean="SaluationDAO" />
+		</property>
+		<property name="genderDAO">
+			<ref bean="GenderDAO" />
+		</property>
+		<property name="registrationTypeDAO">
+			<ref bean="RegistrationTypeDAO" />
+		</property>
+		<property name="registrationStatusDAO">
+			<ref bean="RegistrationStatusDAO" />
+		</property>
+		<property name="patientRatingDAO">
+			<ref bean="PatientRatingDAO" />
+		</property>
+		<property name="patientCategoryDAO">
+			<ref bean="PatientCategoryDAO" />
+		</property>
+		<property name="bloodGroupDAO">
+			<ref bean="BloodGroupDAO" />
+		</property>
+		<property name="maritalDAO">
+			<ref bean="MaritalDAO" />
+		</property>
+		<property name="religionDAO">
+			<ref bean="ReligionDAO" />
+		</property>
+		<property name="motherTongueDAO">
+			<ref bean="MotherTongueDAO" />
+		</property>
+		<property name="nationalityDAO">
+			<ref bean="NationalityDAO" />
+		</property>
+		<property name="idProofsDAO">
+			<ref bean="IdProofsDAO" />
+		</property>
+
+		<property name="patientDAOExtn">
+			<ref bean="PatientDAOExtn" />
+		</property>
+		<property name="referenceDataListDAO">
+			<ref bean="ReferenceDataListDAO"/>
+		</property>
+
+		<property name="contactManager">
+			<ref bean="ContactManager" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+		<property name="serviceManager">
+			<ref bean="ServiceManager" />
+		</property>
+	</bean>
+	
+	<bean id="DoctorManager"
+		class="in.wtc.hcis.bo.doctor.DoctorManagerImpl">
+		<property name="doctorDAO">
+			<ref bean="DoctorDAOExtn" />
+		</property>
+		<property name="doctorDetailDAO">
+			<ref bean="DoctorDetailDAO" />
+		</property>
+		<property name="doctorEspecialtyDAO">
+			<ref bean="DoctorEspecialtyDAO" />
+		</property>
+		<property name="contactManager">
+			<ref bean="ContactManager" />
+		</property>
+		<property name="configurationManager">
+			<ref bean="ConfigurationManager" />
+		</property>
+		
+	</bean>
+
+	<bean id="ServiceManager"
+		class="in.wtc.hcis.bo.services.ServiceManagerImpl">
+		<property name="serviceDAO">
+			<ref bean="ServiceDAOExtn" />
+		</property>
+		<property name="serviceGroupDAO">
+			<ref bean="serviceGroupDAOExtn" />
+		</property>
+		<property name="assignedServicesDAO"
+			ref="AssignedServicesDAOExtn">
+		</property>
+		<property name="appointmentsDAO"
+			ref="AppointmentsDAOExtn">
+		</property>
+		<property name="serviceStatusDAO">
+			<ref bean="ServiceStatusDAO" />
+		</property>
+		<property name="servicePackageStatusDAO">
+			<ref bean="ServicePackageStatusDAO" />
+		</property>
+		<property name="servicePackageDAO"
+			ref="ServicePackageDAOExtn">
+		</property>
+		<property name="packageHasServiceDAO"
+			ref="PackageHasServiceDAO">
+		</property>
+		<property name="assignedPackageDAO">
+			<ref bean="AssignedPackageDAOExtn" />
+		</property>
+		<property name="assignedServiceStatusDAO">
+			<ref bean="AssignedServiceStatusDAO" />
+		</property>
+		<property name="assignedServiceHistoryDAO"
+			ref="AssignedServiceHistoryDAO">
+		</property>
+		<property name="assignedPackageStatusDAO"
+			ref="AssignedPackageStatusDAO">
+		</property>
+		<property name="dataModelManager"
+			ref="DataModelManager">
+		</property>
+		<property name="renderedServiceDAO"
+			ref="RenderedServiceDAOExtn">
+		</property>
+		<property name="dateDimDAO"
+			ref="DateDimDAOExtn">
+		</property>
+		<property name="labRequisitionOrderDAO"
+			ref="LabRequisitionOrderDAO">
+		</property>
+		<property name="servicePriceDetailDAO"
+			ref="ServicePriceDetailDAOExtn">
+		</property>
+		<property name="commonDataManager"
+			ref="CommonDataManager">
+		</property>
+		<property name="patientTestDetailDAO"
+			ref="LabPatientTestDetailDAO">
+		</property>
+	</bean>
+	
+	<bean id="RosterManager"
+		class="in.wtc.hcis.bo.roster.RosterManagerImpl">
+		<property name="rosterDAO">
+			<ref bean="RosterDAOExtn" />
+		</property>
+		<property name="appointmentsDAOExtn">
+			<ref bean="AppointmentsDAOExtn" />
+		</property>
+		<property name="appointmentHistoryDAOExtn">
+			<ref bean="AppointmentHistoryDAOExtn" />
+		</property>
+		<property name="converter">
+			<ref bean="DataModelConverter" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+	</bean>
+
+	<bean id="PrescriptionManager"
+		class="in.wtc.hcis.bo.prescription.PrescriptionManagerImpl">
+		<property name="prescriptionDAO">
+			<ref bean="PrescriptionDAOExtn" />
+		</property>
+		<property name="prescriptionMedicineAssocDAO">
+			<ref bean="PrescriptionMedicineAssocDAO"/>
+		</property>
+		<property name="appointmentsDAO">
+			<ref bean="AppointmentsDAO"/>
+		</property>
+
+	</bean>
+
+	<bean id="ObservationManager"
+		class="in.wtc.hcis.bo.observations.ObservationManagerImpl">
+		<property name="observationsDAO">
+			<ref bean="ObservationsDAOExtn" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+	</bean>
+
+	<bean id="BrandManager"
+		class="in.wtc.hcis.bo.medicine.BrandManagerImpl">
+		<property name="brandDAOExtn">
+			<ref bean="BrandDAOExtn" />
+		</property>
+	</bean>
+
+	<bean id="MedicineManager"
+		class="in.wtc.hcis.bo.medicine.MedicineManagerImpl">
+		<property name="medicinesDAOExtn">
+			<ref bean="MedicinesDAOExtn"/>
+		</property>
+		<property name="brandDAO">
+			<ref bean="BrandDAOExtn"/>
+		</property>
+		<property name="medicineTypeDAO">
+			<ref bean="MedicineTypeDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="AdminManager" class="in.wtc.hcis.bo.admin.AdminManagerImpl">
+		<property name="diseaseDAO">
+			<ref bean="DiseaseDAOExtn"/>
+		</property>
+		<property name="diseaseRequiresServiceDAO">
+			<ref bean="DiseaseRequiresServiceDAO"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+	
+	</bean>
+
+	<bean id="ConfigurationManager"
+		class="in.wtc.hcis.bo.configuration.ConfigurationManagerImpl">
+		<property name="systemParameterDAO">
+			<ref bean="SystemParameterDAO" />
+		</property>
+	</bean>
+	
+	<bean id="ReferralManager"
+		class="in.wtc.hcis.bo.referral.ReferralManagerImpl">
+		<property name="referralDAO">
+			<ref bean="ReferralDAOExtn" />
+		</property>
+		<property name="referralCommissionDAO">
+			<ref bean="ReferralCommissionDAOExtn" />
+		</property>
+		<property name="referralCommissionProcessDAO">
+			<ref bean="ReferralCommissionProcessDAO" />
+		</property>
+		<property name="referralPayableDAO">
+			<ref bean="ReferralPayableDAOExtn" />
+		</property>
+		<property name="appointmentsDAO">
+			<ref bean="AppointmentsDAOExtn" />
+		</property>
+		<property name="referenceDataListDAO">
+			<ref bean="ReferenceDataListDAO" />
+		</property>
+		<property name="renderedServiceDAO">
+			<ref bean="RenderedServiceDAOExtn" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+		<property name="reportManager">
+			<ref bean="ReportManager" />
+		</property>
+	</bean>
+	<bean id="ScheduleManager"
+		class="in.wtc.hcis.bo.admin.ScheduleManagerImpl">
+		<property name="vaccinationScheduleDAO">
+			<ref bean="VaccinationScheduleDAOExtn"/>
+		</property>
+		<property name="vaccinationScheduleDetailsDAO">
+			<ref bean="VaccinationScheduleDetailsDAOExtn"/>
+		</property>
+		<property name="patientVaccinationScheduleDetailsDAO">
+			<ref bean="PatientVaccinationScheduleDetailsDAOExtn"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+		<property name="patientVaccinationScheduleDAO">
+			<ref bean="PatientVaccinationScheduleDAO"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="vaccinationDAO">
+			<ref bean="VaccinationDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="CommonDataManager"
+		class="in.wtc.hcis.bo.common.CommonDataManagerImpl">
+		<property name="referralDAO">
+			<ref bean="ReferralDAOExtn"/>
+		</property>
+		<property name="referenceDataListDAO">
+			<ref bean="ReferenceDataListDAO"/>
+		</property>
+		<property name="vaccinationDAO">
+			<ref bean="VaccinationDAO"/>
+		</property>
+		<property name="especialtyDAO">
+			<ref bean="EspecialtyDAO"/>
+		</property>
+		<property name="vaccinationScheduleDAO">
+			<ref bean="VaccinationScheduleDAO"/>
+		</property>
+
+		<property name="assignedServicesDAO">
+			<ref bean="AssignedServicesDAO"/>
+		</property>
+		<property name="dateDimDAO">
+			<ref bean="DateDimDAOExtn"/>
+		</property>
+		<property name="statusTransitionDAO">
+			<ref bean="StatusTransitionDAOExtn"/>
+		</property>
+		<property name="assignedServiceStatusDAO">
+			<ref bean="AssignedServiceStatusDAO"/>
+		</property>
+		<property name="entityDAO">
+			<ref bean="EntityDAO"/>
+		</property>	
+		<property name="docCheckListDAO">
+			<ref bean="DocCheckListDAOExtn"/>
+		</property>	
+		
+	</bean>
+
+	<bean id="CoreReportManager"
+		class="in.wtc.hcis.bo.report.CoreReportManagerImpl">
+		<property name="reportParamDAO">
+			<ref bean="ReportParamDAOExtn"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="reportManager">
+			<ref bean="ReportManager"/>
+		</property>
+	
+	</bean>
+	
+	<bean id="AccountantManager"
+		class="in.wtc.hcis.bo.accountant.AccountantManagerImpl">
+	</bean>
+	
+	
+	<bean id="EntityManager" class="in.wtc.hcis.bo.admin.EntityManagerImpl">
+		<property name="entityDAO">
+			<ref bean="EntityDAOExtn"/>
+		</property>
+		<property name="contactDAO">
+			<ref bean="ContactDetailsDAO"/>
+		</property>
+		<property name="contactManager">
+			<ref bean="ContactManager"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		
+	</bean>
+
+	<bean id="VitalManager" class="in.wtc.hcis.bo.document.VitalManagerImpl">
+		<property name="vitalFieldDAO">
+			<ref bean="DocVitalFieldDAOExtn"/>
+		</property>
+		<property name="dataModelConverter">
+			<ref bean="DataModelConverter"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+		<property name="patientVitalDAO">
+			<ref bean="DocPatientVitalDAOExtn"/>
+		</property>
+		<property name="patientVitalFieldsValueDAO">
+			<ref bean="DocPatientVitalFieldsValueDAOExtn"/>
+		</property>
+		
+	</bean>
+	
+	<bean id="CheckListManager" class="in.wtc.hcis.bo.document.CheckListManagerImpl">
+		<property name="checkListDetailDAO">
+			<ref bean="DocCheckListDetailDAOExtn"/>
+		</property>
+		<property name="dataModelConverter">
+			<ref bean="DataModelConverter"/>
+		</property>
+		<property name="checkListDAO">
+			<ref bean="DocCheckListDAOExtn"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="checkListInstanceDetailDAOExtn">
+			<ref bean="DocCheckListInstanceDetailDAOExtn"/>
+		</property>
+		<property name="checkListInstanceDAO">
+			<ref bean="DocCheckListInstanceDAO"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+		
+	</bean>  
+
+
+	<!-- Bean to provide application context for whole application -->
+	<bean id="ApplicationContextProvider" class="in.wtc.hcis.bo.context.ApplicationContextProvider"></bean>
+
+</beans>

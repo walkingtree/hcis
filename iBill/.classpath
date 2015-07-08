@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBillDA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBillingBM"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ProcessInterface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISBillingProcesses"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/asm.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/asm-2.2.3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/asm-commons-2.2.3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/asm-util-2.2.3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/aspectjlib.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/c3p0-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-attributes-api.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-attributes-compiler.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-dbcp.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/commons-pool.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/concurrent-1.3.2.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/connector.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/ehcache-1.2.3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jaas.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jacc-1_0-fr.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/javassist.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jaxen-1.1-beta-7.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jboss-archive-browsing.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jboss-cache.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jboss-common.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jboss-jmx.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jboss-system.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jgroups-2.2.8.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jotm.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/jta.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/mysql-connector-java-3.0.17-ga-bin.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/oscache-2.1.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/persistence.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/proxool-0.8.3.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-agent.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-aop.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-aspects.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-beans.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-context.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-core.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-jdbc.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-orm.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-tomcat-weaver.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/spring-tx.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/swarmcache-1.0rc2.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/xapool.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/xerces-2.6.2.jar"/>
+	<classpathentry kind="lib" path="/iBillDA/lib/xml-apis.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

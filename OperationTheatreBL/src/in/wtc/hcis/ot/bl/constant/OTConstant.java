@@ -1,0 +1,15 @@
+package in.wtc.hcis.ot.bl.constant;
+
+public interface OTConstant {
+
+	String SERVICE_TYPE_SURGERY = "SERVICE_TYPE_SURGERY";
+	
+	String CONTEXT_OT_BOOKING_STATUS = "CONTEXT_OT_BOOKING_STATUS";
+	
+	String INITIAL_OT_BOOKIG_STATUS = "CREATED";
+	
+	String INITIAL_PATIENT_SURGERY_STATUS = "CREATED";
+	
+	String BOOKING_STATUS_ADMITTED = "ADMITTED";
+
+}

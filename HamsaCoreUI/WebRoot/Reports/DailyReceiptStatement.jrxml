@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="DailyReceiptStatement"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isFloatColumnFooter="true"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="fromDate" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportsDirPath" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="separator" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[java.io.File.separator]]></defaultValueExpression>
+	</parameter>
+	<parameter name="toDate" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT
+     ac_pymt_rcpt.`ACCOUNT_ID` AS ac_pymt_rcpt_ACCOUNT_ID,
+     ac_account.`ACCOUNT_ID` AS ac_account_ACCOUNT_ID,
+     ac_account.`ENTITY_TYPE_CD` AS ac_account_ENTITY_TYPE_CD,
+     ac_pymt_rcpt.`TRANSACTION_ID` AS ac_pymt_rcpt_TRANSACTION_ID,
+     ac_pymt_rcpt.`PYMT_RCPT_IND` AS ac_pymt_rcpt_PYMT_RCPT_IND,
+     ac_receivable.`MEMO` AS ac_receivable_MEMO,
+     ac_receivable.`RECEIVABLE_SEQ_NBR` AS ac_receivable_RECEIVABLE_SEQ_NBR,
+     ac_pymt_rcpt.`PYMT_RCPT_DT` AS ac_pymt_rcpt_PYMT_RCPT_DT,
+     ac_pymt_rcpt.`CREATE_DATE` AS ac_pymt_rcpt_CREATE_DATE,
+     ac_pymt_rcpt.`PYMT_RCPT_AMT` AS ac_pymt_rcpt_PYMT_RCPT_AMT,
+     ac_pymt_rcpt.`REMAINING_AMOUNT` AS ac_pymt_rcpt_REMAINING_AMOUNT,
+     ac_account.`ACCOUNT_HOLDER_NAME` AS ac_account_ACCOUNT_HOLDER_NAME
+FROM
+     `ac_account` ac_account INNER JOIN `ac_pymt_rcpt` ac_pymt_rcpt ON ac_account.`ACCOUNT_ID` = ac_pymt_rcpt.`ACCOUNT_ID`
+     INNER JOIN `ac_receivable` ac_receivable ON ac_account.`ACCOUNT_ID` = ac_receivable.`ACCOUNT_ID`
+     AND (ac_receivable.`MEMO` LIKE 'Appointment%' OR ac_receivable.`MEMO` LIKE 'Registration%')
+     INNER JOIN `ac_receivable_asgm` ac_receivable_asgm ON ac_receivable.`RECEIVABLE_SEQ_NBR` = ac_receivable_asgm.`RECEIVABLE_SEQ_NBR`
+     AND ac_receivable_asgm.`TRANSACTION_ID` = ac_pymt_rcpt.`TRANSACTION_ID`
+WHERE 
+    ((($P{fromDate} IS NULL)  OR ($P{fromDate} = ''))  OR (ac_pymt_rcpt.`PYMT_RCPT_DT` >= (str_to_date($P{fromDate},"%d/%m/%Y"))))
+   AND 
+    ((($P{toDate} IS NULL)  OR ($P{toDate} = ''))  OR (ac_pymt_rcpt.`PYMT_RCPT_DT` <= (str_to_date($P{toDate},"%d/%m/%Y"))))	
+ORDER BY
+     ac_pymt_rcpt.`PYMT_RCPT_DT` ASC]]></queryString>
+
+	<field name="ac_pymt_rcpt_ACCOUNT_ID" class="java.lang.String"/>
+	<field name="ac_account_ACCOUNT_ID" class="java.lang.String"/>
+	<field name="ac_account_ENTITY_TYPE_CD" class="java.lang.String"/>
+	<field name="ac_pymt_rcpt_TRANSACTION_ID" class="java.lang.String"/>
+	<field name="ac_pymt_rcpt_PYMT_RCPT_IND" class="java.lang.String"/>
+	<field name="ac_receivable_MEMO" class="java.lang.String"/>
+	<field name="ac_receivable_RECEIVABLE_SEQ_NBR" class="java.lang.String"/>
+	<field name="ac_pymt_rcpt_PYMT_RCPT_DT" class="java.sql.Date"/>
+	<field name="ac_pymt_rcpt_CREATE_DATE" class="java.sql.Date"/>
+	<field name="ac_pymt_rcpt_PYMT_RCPT_AMT" class="java.lang.Double"/>
+	<field name="ac_pymt_rcpt_REMAINING_AMOUNT" class="java.lang.Double"/>
+	<field name="ac_account_ACCOUNT_HOLDER_NAME" class="java.lang.String"/>
+
+	<variable name="totalRcptAmnt" class="java.lang.Double" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ac_pymt_rcpt_PYMT_RCPT_AMT}]]></variableExpression>
+	</variable>
+	<variable name="totalRmngAmnt" class="java.lang.Double" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{ac_pymt_rcpt_REMAINING_AMOUNT}]]></variableExpression>
+	</variable>
+
+		<group  name="recpDateGroup" >
+			<groupExpression><![CDATA[$F{ac_pymt_rcpt_PYMT_RCPT_DT}]]></groupExpression>
+			<groupHeader>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="2"
+						y="0"
+						width="532"
+						height="20"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="textField-1"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[" For- "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="32"
+						y="0"
+						width="123"
+						height="20"
+						forecolor="#FFFFFF"
+						key="textField-23"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{ac_pymt_rcpt_PYMT_RCPT_DT}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="2"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="74"
+						y="10"
+						width="461"
+						height="40"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText-2"/>
+					<box>					<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="25" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Walking Tree Consultancy Services]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="11"
+						width="65"
+						height="38"
+						key="image-1"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{reportsDirPath}+ $P{separator}+ "images"+$P{separator}+"WTC_logo.JPG"]]></imageExpression>
+				</image>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="45"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="2"
+						y="5"
+						width="532"
+						height="40"
+						forecolor="#FFFFFF"
+						backcolor="#A7C1CE"
+						key="staticText-3"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="14" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[RECEIPT STATEMENT]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="199"
+						y="29"
+						width="79"
+						height="16"
+						key="textField-13">
+							<printWhenExpression><![CDATA[new Boolean($P{fromDate} != null && $P{fromDate}.length() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["From :"+$P{fromDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="278"
+						y="28"
+						width="61"
+						height="16"
+						key="textField-14">
+							<printWhenExpression><![CDATA[new Boolean($P{toDate} != null && $P{toDate}.length()>0)]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[" up to:" +$P{toDate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="27"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="455"
+						y="0"
+						width="79"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-19"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[REMAINING AMOUNT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="381"
+						y="0"
+						width="74"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-5"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[RCPT AMOUNT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="322"
+						y="0"
+						width="59"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-6"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[DATE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="210"
+						y="0"
+						width="112"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-18"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TRANSACTION ID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="87"
+						y="0"
+						width="123"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-17"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[PATIENT NAME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="2"
+						y="0"
+						width="85"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-4"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[ACCOUNT ID]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="2"
+						y="0"
+						width="85"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-4"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ac_pymt_rcpt_ACCOUNT_ID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="95"
+						y="0"
+						width="115"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-17"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ac_account_ACCOUNT_HOLDER_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Column" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="210"
+						y="0"
+						width="112"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-18"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ac_pymt_rcpt_TRANSACTION_ID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="322"
+						y="0"
+						width="59"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-19"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{ac_pymt_rcpt_PYMT_RCPT_DT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="381"
+						y="0"
+						width="74"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-20"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{ac_pymt_rcpt_PYMT_RCPT_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="###0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="454"
+						y="0"
+						width="80"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-21"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{ac_pymt_rcpt_REMAINING_AMOUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="314"
+						y="0"
+						width="67"
+						height="20"
+						key="staticText-16"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[Grand Total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="381"
+						y="1"
+						width="74"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{totalRcptAmnt}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="454"
+						y="1"
+						width="80"
+						height="19"
+						key="textField-22"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{ac_pymt_rcpt_REMAINING_AMOUNT}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="2"
+						y="1"
+						width="527"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="20"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="2"
+						y="2"
+						width="100"
+						height="18"
+						key="textField-16"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

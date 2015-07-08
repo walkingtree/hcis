@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="package_has_service" catalog="hcis">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="assigned_service_history" catalog="hcisit">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="assigned_package" catalog="hcisit">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="assigned_services" catalog="hcisit"></table>
+	<table name="service" catalog="hcisit"></table>
+	<table name="service_group" catalog="hcisit"></table>
+	<table name="rendered_service" catalog="hcisit"></table>
+</hibernate-reverse-engineering>

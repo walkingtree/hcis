@@ -1,0 +1,16 @@
+from  ClaimSponsor as sponsor, ContactDetails as contact where sponsor.contactCode = contact.contactCode 
+
+
+#set( $andStr = "and"  )
+
+#if($Util.isValid($sponsorName) ==" true")
+ and sponsor.sponsorsName = $sponsorName 
+#end
+
+#if($Util.isValid($sponsorTypeCd) ==" true")
+ and sponsor.sponsorType.sponsorTypeCd = $sponsorTypeCd 
+#end
+
+#if($Util.isValid($sponsorDescription) ==" true")
+ and sponsor.sponsorDesc = $sponsorDescription 
+#end

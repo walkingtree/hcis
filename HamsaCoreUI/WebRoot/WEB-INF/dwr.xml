@@ -1,0 +1,456 @@
+
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+	"http://getahead.org/dwr//dwr30.dtd">
+
+<dwr>
+	<allow>
+		<create creator="new" javascript="JDate">
+			<param name="class" value="java.util.Date" />
+		</create>
+		
+		<convert match="java.lang.Exception" converter="exception" />
+		<convert match="java.lang.StackTraceElement" converter="bean"  />
+		
+		<!--
+		Bhavesh - testing
+		<create creator="new" javascript="FileUploader" scope="session">
+	      <param name="class" value="in.wtc.ui.controller.FileUploader"/>
+	    </create>
+	    
+		-->
+		<create creator="spring" javascript="FileUploader">
+	      <param name="beanName" value="FileUploader"/>
+	    </create>
+	    
+		<create creator="spring" javascript="DataModelManager">
+			<param name="beanName" value="DataModelManager" />
+		</create>
+		
+		
+		<create creator="spring" javascript="CoreReportManager">
+			<param name="beanName" value="CoreReportManager" />
+		</create>
+		
+		<create creator="spring" javascript="ReferralManager">
+			<param name="beanName" value="ReferralManager" />
+		</create>
+		
+		<create creator="spring" javascript="ServiceManager">
+			<param name="beanName" value="ServiceManager" />
+		</create>
+		<!--  BRAND & MEDICINE START -->
+		<create javascript="BrandManagementController" creator="spring">
+              <param name="beanName" value="BrandManagementController"/>
+      	</create>
+      	
+      	<create javascript="MedicineManagementController" creator="spring">
+      			<param name="beanName" value="MedicineManagementController"></param>
+      	</create>
+      	<!-- BRAND AND MEDICINE END -->
+      	
+	   <!-- USER &ROLE MANAGEMENT START -->
+		<create javascript="UserManagementController" creator="spring">
+			<param name="beanName" value="userManagementController"></param>
+		</create>	
+			   
+		<create javascript="ReferenceDataManager" creator="spring">
+			<param name="beanName" value="referenceDataManagerService"></param>
+		</create>
+		
+		<create javascript="RoleManagementController" creator="spring">
+			<param name="beanName" value="roleManagementController"></param>
+		</create>  
+
+      	<!-- USER & ROLE MANAGEMENT END -->
+      	
+      
+		<convert converter="bean" match="in.wtc.hcis.bo.common.ListRange" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.CodeAndDescription" />
+		
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ReferralBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ReferralLightBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ReferralCommissionBM" />
+		
+		<!-- SERVICE MANAGEMENT CONVERTERS START -->
+		<convert converter="bean" match="in.wtc.hcis.bm.base.AssignSvcAndPackageBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.AssignedServiceBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.AssignedPackageBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServicePackageBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PackageHasServiceBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServiceChargeOverrideInfoBM"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PrescriptionLineItemBM"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServicePackageSummaryBM"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServiceGroupBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.AssignedServiceInfoBM"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServiceBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServiceSummaryBM"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServicePriceUpdateBM"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ServicePriceDetailBM"/>
+		
+		<!--  SERVICE MANAGEMENT CONVERTERS END -->
+		
+		<!-- USER & ROLE MANAGEMENT CONVERTERS START-->		
+		<convert converter="bean" match="com.wtc.usermanager.bm.User" ></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.Role"></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.AuthorisedUser" ></convert>
+		<convert converter="bean" match="com.wtc.usermanager.util.ListRange"></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.CodeAndDescription"></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.UserSummary"></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.Service"></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.TreeNode"></convert>
+		<convert converter="bean" match="com.wtc.usermanager.bm.RoleSummary"></convert>		
+		<!-- USER & ROLE MANAGEMENT CONVERTERS END -->
+		
+		<!-- BRAND & MEDICINE CONVERTERS START -->
+		<convert match="in.wtc.hcis.bm.base.BrandBM" converter="bean" />
+		<convert match="in.wtc.hcis.bm.base.MedicineBM" converter="bean" />
+		<!--  BRAND & MEDICINE CONVERTERS END -->
+		
+		<!-- CONFIGURATION MANAGER START -->
+		<create javascript="ConfigurationManager" creator="spring">
+      		<param name="beanName" value="ConfigurationManager"></param>
+      	</create>
+		<!-- CONFIGURATION MANAGER END -->
+		
+		<!-- PATIENT START -->
+		<convert converter="bean" match="in.wtc.ui.model.PatientSummary" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientInfoDetailBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.OtherAllergiesBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientAllergiesBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientImmunizationsBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ContactBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ContactDetailsBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PersonalDetailsBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PersonalContactDetails" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.OtherDetailsBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PersonalDetailsAdditionalBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.EmergencyContactBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientLiteBM" ></convert>
+		
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ReportParamBM" ></convert>
+		
+		<convert converter="map" match="java.util.Map"/>		
+		
+		<create creator="spring" javascript="PatientManager">
+			<param name="beanName" value="PatientManager" />
+		</create>
+		<create creator="spring" javascript="PatientManagementController">
+			<param name="beanName" value="PatientManagementController" />
+		</create>
+		<!-- PATIENT END -->
+		
+		<!-- APPOINTMENT START -->
+		<convert converter="bean" match="in.wtc.ui.model.AppointmentSummaryModel" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.AppointmentBM" />
+		
+		<create creator="spring" javascript="AppointmentManagementController">
+			<param name="beanName" value="AppointmentManagementController" />
+		</create>
+		<create creator="spring" javascript="AppointmentManager">
+			<param name="beanName" value="AppointmentManager" />
+		</create>
+		<!-- APPOINTMENT END -->
+		
+		<!-- DOCTOR MANAGEMENT START -->
+		<convert converter="bean" match="in.wtc.ui.model.DoctorSummary" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.DoctorSummaryBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.DoctorDetailBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.DoctorEspecialtyBM" />
+		<convert converter="bean" match="in.wtc.ui.model.DoctorDetails" />
+		
+		<create creator="spring" javascript="DoctorManagementController">
+			<param name="beanName" value="DoctorManagementController" />
+		</create>		
+		<!-- DOCTOR MANAGEMENT END -->
+		
+		<!-- TREATMENT HISTORY START -->
+		<convert converter="bean" match="in.wtc.ui.model.TreatmentSummary" />
+		<convert converter="bean" match="in.wtc.ui.model.MedicalPrescriptionModel" />
+		<convert converter="bean" match="in.wtc.ui.model.MedicalPrescriptionSummaryModel" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PrescriptionBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ObservationBM" />
+		
+		<create creator="spring" javascript="TreatmentHistoryController">
+			<param name="beanName" value="TreatmentHistoryController" />
+		</create>
+		<create creator="spring" javascript="MedicalPrescriptionController">
+			<param name="beanName" value="MedicalPrescriptionController" />
+		</create>
+		<!-- TREATMENT HISTORY END -->
+		
+		<!-- ROSTER START -->
+		<convert match="in.wtc.ui.model.DoctorAppointmentRosterModel" converter="bean" />
+		<convert match="in.wtc.ui.model.RosterView" converter="bean"></convert>
+		<convert match="in.wtc.hcis.bm.base.RosterBM" converter="bean"></convert>
+		<convert match="in.wtc.hcis.bm.base.RosterTimeBM" converter="bean"></convert>
+		<convert match="in.wtc.hcis.bm.base.RoomBM" converter="bean"></convert>
+		<convert match="in.wtc.hcis.bm.base.RosterModel" converter="bean"></convert>
+		
+		<create javascript="RosterManagementController" creator="spring">
+      		<param name="beanName" value="RosterManagementController"></param>
+	    </create>
+	    <create javascript="RosterManager" creator="spring">
+	    	<param name="beanName" value="RosterManager"></param>
+	    </create>
+		<!-- ROSTER END -->
+		
+		<create javascript="CheckListManager" creator="spring">
+			<param name="beanName" value="CheckListManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.hcis.bm.base.CheckListBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.CheckListDetailBM"></convert>
+
+		<!-- BILLING START
+			<convert converter="bean" match="in.wtc.billing.bm.BillDataBM"></convert>
+			<convert converter="bean" match="in.wtc.billing.bm.BillingSubprocessBM"></convert>
+			<convert converter="bean" match="in.wtc.billing.bm.BillDetailsBM"></convert> -->
+		<!--  BILLING END -->
+		
+		<!-- VACCINATION SCHEDULE START -->
+		<convert converter="bean" match="in.wtc.hcis.bm.base.VaccinationScheduleDetailBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.VaccinationScheduleBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientVaccinationScheduleBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientVaccinationScheduleDetailsBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.VaccinationBM"></convert>
+		
+		<create javascript="ScheduleManager" creator="spring">
+			<param name="beanName" value="ScheduleManager"></param>
+		</create>
+		<!-- VACCINATION SCHEDULE END -->
+		
+		<!-- Entity configuration -->
+		<create creator="spring" javascript="EntityManager">
+			<param name="beanName" value="EntityManager" />
+		</create>
+		<convert match="in.wtc.hcis.bm.base.EntityBM" converter="bean"/>
+		<!-- Entity configuration end -->
+		
+		<!-- IPD START -->
+		<create javascript="IPDataModelManager" creator="spring">
+      		<param name="beanName" value="IPDataModelManager"></param>
+        </create>
+       
+		
+		<!-- BED START -->
+		<convert match="in.wtc.hcis.bm.ip.BedMasterBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.BedSpecialFeatureAvailability" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.BedPoolUnitTypeAsgmBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.BedPoolBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.BedEnvelopeBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.BedEnvelopePoolAsgmBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.BedReservationBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.PreferredBedBM" converter="bean"/>
+		
+		<create javascript="IPReferenceDataManager" creator="spring">
+      		<param name="beanName" value="IPReferenceDataManager"></param>
+      	</create>
+      	<create javascript="BedManager" creator="spring">
+      		<param name="beanName" value="BedManager"></param>
+     		</create>
+      	<!-- BED END -->
+		
+		<!-- ORDER MANAGEMENT START -->
+      	<convert match="in.wtc.hcis.bm.ip.OrderTypeAttributeAssociationBM" converter="bean"/>
+      	<convert match="in.wtc.hcis.bm.ip.DoctorOrderBM" converter="bean"/>
+      	<convert match="in.wtc.hcis.bm.ip.DoctorOrderDetailsBM" converter="bean"/>
+		<convert match="in.wtc.hcis.bm.ip.OrderTemplateSummaryBM" converter="bean"/>
+		<convert converter="bean" match="in.wtc.hcis.bm.ip.DoctorOrderGroupBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.OrderGroupTemplateAssociationBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.OrderTemplateBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.OrderTemplateDetailsBM"></convert>
+		
+ 		<create javascript="OrderManager" creator="spring">
+      		<param name="beanName" value="OrderManager"></param>
+       </create>
+       <!-- ORDER MANAGEMENT END -->
+       
+       <!-- INSURANCE START -->
+		<convert converter="bean" match="in.wtc.hcis.bm.ip.InsurerBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.InsurancePlanBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.PlanHasServicesBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.PlanCoversDiseaseBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.SponsorInsurerAssociationBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.SponsorSlaBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.ClaimRequestBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.ClaimDocumentBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.SponsorDetailsBM"></convert>
+      	<convert converter="bean" match="in.wtc.hcis.bm.ip.AdmissionLightBM"></convert>
+		
+		<create javascript="InsuranceManager" creator="spring">
+      		<param name="beanName" value="InsuranceManager"></param>
+      	</create>
+		
+		<!-- INSURANCE END -->
+		
+		<!-- ADMISSION START -->
+     		
+     		<create javascript="AdmissionOrder" creator="spring">
+      			<param name="beanName" value="AdmissionOrder"></param>
+       		</create>
+       		
+     		<convert match="in.wtc.hcis.bm.ip.AdmissionBM" converter="bean"/>
+			<convert match="in.wtc.hcis.bm.ip.PastTransactionsBM" converter="bean"/>
+			
+		<!-- ADMISSION END -->
+		<!-- IPD END -->
+    	
+    	<!-- OPD SYSTEM PARAM -->
+      	<convert converter="bean" match="in.wtc.hcis.bm.base.SystemParamBM"></convert>
+		
+		<!-- BILLING RELATED FILES START -->
+		
+		<convert converter="bean" match="in.wtc.billing.bm.BillObjectBM"></convert>
+		<convert converter="bean" match="in.wtc.billing.bm.BillDataBM"></convert>
+		<convert converter="bean" match="in.wtc.billing.bm.BillingSubprocessBM"></convert>
+		<convert converter="bean" match="in.wtc.billing.bm.BillDetailsBM"></convert>
+		
+		<convert converter="bean" match="in.wtc.billing.util.ListRange"></convert>
+		
+		<create creator="spring" javascript="BillManager">
+			<param name="beanName" value="BillManager"></param>
+		</create>
+		
+		<!-- BILLING RELATED FILES END -->
+		
+		<!-- ACCOUNTANT INTEGRATION START -->
+		
+		<create creator="spring" javascript="AccountantManager">
+			<param name="beanName" value="AccountantManager"></param>
+		</create>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ReceivableBM"></convert>
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PaymentReceiptBM"></convert>
+		
+		<!--ACCOUNTANT INTEGRATION END  -->
+		
+		<convert converter="bean" match="in.wtc.hcis.bm.base.ImagePopertyBM"></convert>
+		
+		<!-- LIMS START -->
+		
+		<convert converter="bean" match="in.wtc.lims.bm.TechniqueReagentBM"></convert>
+		<convert converter="bean" match="in.wtc.lims.bm.TestAttributeBM"></convert>
+		<convert converter="bean" match="in.wtc.lims.bm.CodeAndDescription"></convert>
+		<convert converter="bean" match="in.wtc.lims.bm.LabDetailBM"></convert>
+		<convert converter="bean" match="in.wtc.lims.bm.ContactDetailsBM"></convert>
+		
+		
+		<convert converter="bean" match="in.wtc.lims.bm.ListRange" />
+		
+		<convert converter="bean" match="in.wtc.lims.bm.LabTestSpecimenAssocBM" />
+		<convert converter="bean" match="in.wtc.lims.bm.LabTestBM" />
+		<convert converter="bean" match="in.wtc.lims.bm.LabTestAttributeAssocBM" />
+		<convert converter="bean" match="in.wtc.lims.bm.LabTestAttributeBM" />
+		
+		<create creator="spring" javascript="LabConfigManager">
+			<param name="beanName" value="LabConfigManager"></param>
+		</create>
+		<create creator="spring" javascript="LimsReferenceDataManager">
+			<param name="beanName" value="LimsReferenceDataManager"></param>
+		</create>
+		<create creator="spring" javascript="LabTestManager">
+			<param name="beanName" value="LabTestManager"></param>
+		</create>
+		
+		<create creator="spring" javascript="LabDetailManager">
+			<param name="beanName" value="LabDetailManager"></param>
+		</create>
+		
+		<create creator="spring" javascript="LimsDataModelManager">
+			<param name="beanName" value="LimsDataModelManager"></param>
+		</create>
+		
+		<!--REQUISITION ORDER START-->
+		
+		<create creator="spring" javascript="RequisitionOrderManager">
+			<param name="beanName" value="RequisitionOrderManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.lims.bm.RequisitionOrderBM" />
+
+		<convert converter="bean" match="in.wtc.lims.bm.RequisitionOrderDetailBM" />
+		<convert converter="bean" match="in.wtc.lims.bm.PatientRequisitionBM" />
+		
+		<!--REQUISITION ORDER END-->
+		
+		<!-- TEST TEMPLATE START -->
+
+		<convert converter="bean" match="in.wtc.lims.bm.TemplateWidgetBM" />
+		<convert converter="bean" match="in.wtc.lims.bm.TestTemplateBM" />
+
+		
+		<create creator="spring" javascript="TestTemplateManager">
+			<param name="beanName" value="TestTemplateManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.lims.bm.PatientTestDetailBM" />
+		<convert converter="bean" match="in.wtc.lims.bm.PatientTestAttrValueBM" />
+		
+		<!-- TEST TEMPLATE END -->
+		
+		<!-- COLLECTION POINT START -->
+
+		<create creator="spring" javascript="CollectionPointManager">
+			<param name="beanName" value="CollectionPointManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.lims.bm.SpecimenCollectionPointBM" />
+		
+			
+		
+		<!-- COLLECTION POINT END -->
+		
+		<convert converter="bean" match="in.wtc.lims.bm.TestResultChangeHistoryBM" />
+		
+		<!-- LIMS END -->
+		
+		<!-- OPERATION THEATRE START -->
+		
+		<create creator="spring" javascript="OTManager">
+			<param name="beanName" value="OTManager"></param>
+		</create>
+		
+		<create creator="spring" javascript="OTReferenceDataManager">
+			<param name="beanName" value="OTReferenceDataManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.OTDetailBM" />
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.OtSurgeryAssoBM" />
+		
+	
+		<create creator="spring" javascript="SurgeryManager">
+			<param name="beanName" value="SurgeryManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.SurgeryBM" />
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.SurgeryStatusTimeBM" />
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.PatientSurgeryBM" />
+
+
+		<create creator="spring" javascript="VitalManager">
+			<param name="beanName" value="VitalManager"></param>
+		</create>
+		
+		<convert converter="bean" match="in.wtc.hcis.bm.base.VitalFieldBM" />
+		<convert converter="bean" match="in.wtc.hcis.bm.base.PatientVitalBM" />
+
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.OTSurgeonAvaibilityBM" />
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.OTBookingBM" />
+
+
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.OtNotesBM" />
+		<convert converter="bean" match="in.wtc.hcis.ot.bm.OtNotesFieldsBM" />
+		
+		<!-- OPERATION THEATRE START -->
+		
+		<!-- WORK FLOW MANAGER -->
+		<create creator="spring" javascript="WorkFlowManager">
+			<param name="beanName" value="WorkFlowManager"></param>
+		</create>
+		
+		
+		<convert converter="bean" match="com.wtc.usermanager.bm.WorkFlowProcessBM" />
+		
+		<!-- WORK FLOW MANAGER -->
+		
+	</allow>
+</dwr>

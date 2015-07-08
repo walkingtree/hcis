@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true" rollback-for="HCISException"/>
+			<tx:method name="*" rollback-for="HCISException"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="hcisMethods"
+			expression="execution(* in.wtc.hcis.bo.*.*Manager.*(..))" />
+		<aop:pointcut id="hcisIPMethods"
+			expression="execution(* in.wtc.hcis.ip.bo.*.*Manager.*(..))" />
+		<aop:pointcut id="userMgmtMethods"
+			expression="execution(* com.wtc.usermanager.bo.*.*Manager.*(..))" />
+
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="hcisMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="hcisIPMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userMgmtMethods" />
+	</aop:config>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+ 
+	<bean id="IPReferenceDataManager"
+		class="in.wtc.hcis.ip.common.IPReferenceDataManagerImpl">
+		<property name="activityTypeDAO">
+			<ref bean="ActivityTypeDAO" />
+		</property>
+		<property name="admissionEntryPointDAO">
+			<ref bean="AdmissionEntryPointDAO" />
+		</property>
+		<property name="actionStatusDAO">
+			<ref bean="ActionStatusDAO" />
+		</property>
+		<property name="admissionStatusDAO">
+			<ref bean="AdmissionStatusDAO" />
+		</property>
+		<property name="bedStatusDAO">
+			<ref bean="BedStatusDAO" />
+		</property>
+		<property name="bedTypeDAO">
+			<ref bean="BedTypeDAO" />
+		</property>
+		<property name="claimSponsorsDAO">
+			<ref bean="ClaimSponsorDAO" />
+		</property>
+		<property name="creditClassDAO">
+			<ref bean="CreditClassDAO" />
+		</property>
+		<property name="doctorOrderGroupDAO">
+			<ref bean="DoctorOrderGroupDAO" />
+		</property>
+		<property name="dischargeTypeDAO">
+			<ref bean="DischargeTypeDAO" />
+		</property>
+		<property name="doctorOrderStatusDAO">
+			<ref bean="DoctorOrderStatusDAO" />
+		</property>
+		<property name="doctorOrderTypeDAO">
+			<ref bean="DoctorOrderTypeDAO" />
+		</property>
+		<property name="doctorOrderTemplateDAO">
+			<ref bean="DoctorOrderTemplateDAO" />
+		</property>
+		<property name="bedSpecialFeatureDAO">
+			<ref bean="BedSpecialFeatureDAO" />
+		</property>
+		<property name="nursingUnitTypeDAO">
+			<ref bean="NursingUnitTypeDAO" />
+		</property>
+		<property name="reservationStatusDAO">
+			<ref bean="ReservationStatusDAO" />
+		</property>
+		<property name="sponsorClaimStatusDAO">
+			<ref bean="SponsorClaimStatusDAO" />
+		</property>
+		<property name="sponsorTypeDAO">
+			<ref bean="SponsorTypeDAO" />
+		</property>
+		<property name="nursingUnitDAO">
+			<ref bean="NursingUnitDAO" />
+		</property>
+		<property name="bedPoolDAO">
+			<ref bean="BedPoolDAOExtn" />
+		</property>
+		<property name="insurancePlansDAO">
+			<ref bean="InsurancePlansDAOExtn" />
+		</property>
+		<property name="sponsorInsurerAssociationDAO">
+			<ref bean="SponsorInsurerAssociationDAO" />
+		</property>
+		<property name="insurerDAO">
+			<ref bean="InsurerDAO" />
+		</property>
+		<property name="admissionDAO">
+			<ref bean="AdmissionDAO" />
+		</property>
+		<property name="bedMasterDAO">
+			<ref bean="BedMasterDAO"/>
+		</property>
+	</bean> 
+	
+	<bean id="IPDataModelManager"
+		class="in.wtc.hcis.ip.common.IPDataModelManagerImpl">
+		<property name="servicePackageDAO">
+			<ref bean="ServicePackageDAOExtn" />
+		</property>
+		<property name="bedEnvelopeDAO">
+			<ref bean="BedEnvelopeDAO" />
+		</property>
+		<property name="bedMasterDAO">
+			<ref bean="BedMasterDAO" />
+		</property>
+		<property name="bedPoolDAO">
+			<ref bean="BedPoolDAO" />
+		</property>
+	
+		<property name="bedReservationDAO">
+			<ref bean="BedReservationDAO" />
+		</property>
+		<property name="bedStatusDAO">
+			<ref bean="BedStatusDAO" />
+		</property>
+		<property name="bedTypeDAO">
+			<ref bean="BedTypeDAO" />
+		</property>
+		<property name="nursingUnitDAO">
+			<ref bean="NursingUnitDAO" />
+		</property>
+		<property name="nursingUnitTypeDAO">
+			<ref bean="NursingUnitTypeDAO" />
+		</property>
+		<property name="admissionDAO">
+			<ref bean="AdmissionDAOExtn" />
+		</property>
+			<property name="doctorOrderDAO">
+			<ref bean="DoctorOrderDAO" />
+		</property>
+			<property name="doctorOrderGroupDAO">
+			<ref bean="DoctorOrderGroupDAO" />
+		</property>
+		<property name="doctorOrderTemplateDAO">
+			<ref bean="DoctorOrderTemplateDAO" />
+		</property>
+			<property name="doctorOrderStatusDAO">
+			<ref bean="DoctorOrderStatusDAO" />
+		</property>
+			<property name="doctorOrderTypeDAO">
+			<ref bean="DoctorOrderTypeDAO" />
+		</property>
+			<property name="actionStatusDAO">
+			<ref bean="ActionStatusDAO" />
+		</property>
+			<property name="activityTypeDAO">
+			<ref bean="ActivityTypeDAO" />
+		</property>
+			<property name="serviceDAO">
+			<ref bean="ServiceDAO" />
+		</property>
+		<property name="admissionStatusDAO">
+			<ref bean="AdmissionStatusDAO" />
+		</property>
+		<property name="bedHasSpecialFeaturesDAO">
+			<ref bean="BedHasSpecialFeaturesDAO" />
+		</property>
+		<property name="bedSpecialFeatureDAO">
+			<ref bean="BedSpecialFeatureDAO" />
+		</property>
+		
+		<property name="admissionEntryPointDAO">
+			<ref bean="AdmissionEntryPointDAO" />
+		</property>
+		<property name="dischargeTypeDAO">
+			<ref bean="DischargeTypeDAO" />
+		</property>
+		<property name="dischargeOrderDAO">
+			<ref bean="DischargeOrderDAO" />
+		</property>
+		<property name="admissionClaimRequestDAO">
+			<ref bean="AdmissionClaimRequestDAO" />
+		</property>
+		<property name="claimSponsorDAO">
+			<ref bean="ClaimSponsorDAO" />
+		</property>
+		<property name="creditClassDAO">
+			<ref bean="CreditClassDAO" />
+		</property>
+		<property name="insurancePlansDAO">
+			<ref bean="InsurancePlansDAO" />
+		</property>
+		<property name="sponsorTypeDAO">
+			<ref bean="SponsorTypeDAO" />
+		</property>
+		<property name="sponsorClaimStatusDAO">
+			<ref bean="SponsorClaimStatusDAO" />
+		</property>
+			<property name="attributeDAO">
+			<ref bean="AttributeDAO" />
+		</property>
+		<property name="insurerDAO">
+			<ref bean="InsurerDAO" />
+		</property>
+		<property name="reservationStatusDAO">
+			<ref bean="ReservationStatusDAO" />
+		</property>
+		
+	</bean>	
+		
+	<bean id="IPDataModelConverter" class="in.wtc.hcis.ip.common.IPDataModelConverter">
+		<property name="dataModelManager">
+			<ref bean="IPDataModelManager"/>
+		</property>
+		
+		<property name="coreDataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+		<property name="orderAttributeValueDAO">
+            <ref bean="OrderAttributeValueDAO"/>
+        </property>
+	</bean>
+	
+	<bean id="BedManager" class="in.wtc.hcis.ip.bo.bed.BedManagerImpl">
+		<property name="dataModelConverter">
+			<ref bean="IPDataModelConverter" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="IPDataModelManager" />
+		</property>
+		<property name="bedMasterDAO">
+			<ref bean="BedMasterDAOExtn" />
+		</property>
+		<property name="bedPoolDAO">
+			<ref bean="BedPoolDAOExtn" />
+		</property>
+		<property name="bedPoolHasUnitTypeDAO">
+			<ref bean="BedPoolHasUnitTypeDAOExtn" />
+		</property>
+		<property name="bedEnvelopeDAO">
+			<ref bean="BedEnvelopeDAOExtn" />
+		</property>
+		<property name="bedEnvelopeHasPoolDAO">
+			<ref bean="BedEnvelopeHasPoolDAOExtn" />
+		</property>
+	
+		<property name="bedReservationDAO">
+			<ref bean="BedReservationDAOExtn" />
+		</property>
+		<property name="bedReservationSpecialFeaturesDAO">
+			<ref bean="BedReservationSpecialFeaturesDAO" />
+		</property>
+		<property name="bedHasSpecialFeaturesDAO">
+			<ref bean="BedHasSpecialFeaturesDAO" />
+		</property>
+		<property name="nursingUnitTypeDAO">
+			<ref bean="NursingUnitTypeDAO" />
+		</property>
+		<property name="bedActivityDAO">
+			<ref bean="BedActivityDAO" />
+		</property>
+		<property name="bedReservationActivityDAO">
+			<ref bean="BedReservationActivityDAO" />
+		</property>
+		<property name="bedSpecialFeatureDAO">
+			<ref bean="BedSpecialFeatureDAO" />
+		</property>
+		<property name="bedUsageHistoryDAO">
+			<ref bean="BedUsageHistoryDAOExtn" />
+		</property>
+		<property name="bedBillHistoryDAO">
+			<ref bean="BedBillHistoryDAO" />
+		</property>
+	</bean>
+	
+	
+	<bean id="OrderManager" class="in.wtc.hcis.ip.bo.order.OrderManagerImpl">
+		<property name="converter">
+			<ref bean="IPDataModelConverter" />
+		</property>
+		<property name="dataModelManager">
+			<ref bean="IPDataModelManager" />
+		</property>
+		<property name="baseDataModelManager">
+			<ref bean="DataModelManager" />
+		</property>
+		<property name="doctorOrderTypeDAO">
+			<ref bean="DoctorOrderTypeDAO" />
+		</property>
+		<property name="doctorOrderTemplateDAO">
+			<ref bean="DoctorOrderTemplateDAOExtn" />
+		</property>
+		<property name="doctorOrderGroupDAO">
+			<ref bean="DoctorOrderGroupDAOExtn" />
+		</property>	
+			<property name="doctorOrderGroupHasTemplateDAO">
+			<ref bean="DoctorOrderGroupHasTemplateDAO" />
+		</property>
+		<property name="doctorOrderDetailsDAO">
+			<ref bean="DoctorOrderDetailsDAO" />
+		</property>
+		<property name="serviceDAO">
+			<ref bean="ServiceDAOExtn" />
+		</property>
+		<property name="doctorOrderDAO">
+			<ref bean="DoctorOrderDAOExtn" />
+		</property>
+	
+		<property name="doctorOrderTemplateDetailsDAO">
+			<ref bean="DoctorOrderTemplateDetailsDAO" />
+		</property>
+		<property name="patientManager">
+			<ref bean="PatientManager" />
+		</property>
+		<property name="doctorOrderActivityDAO">
+			<ref bean="DoctorOrderActivityDAO" />
+		</property>
+		
+		<property name="orderTypeHasAttributesDAO">
+			<ref bean="OrderTypeHasAttributesDAO"/>
+		</property>
+		<property name="orderAttributeValueDAO">
+			<ref bean="OrderAttributeValueDAO"/>
+		</property>
+		<property name="admissionDAO">
+			<ref bean="AdmissionDAOExtn"/>
+		</property>
+		<property name="serviceManager">
+			<ref bean ="ServiceManager"/>
+		</property>
+		<property name="dischargeOrderDAO">
+			<ref bean="DischargeOrderDAOExtn" />
+		</property>
+		<property name="dischargeActivityDAO">
+			<ref bean="DischargeActivityDAO" />
+		</property>
+		<property name="bedManager">
+			<ref bean="BedManager" />
+		</property>
+		<property name="configurationManager">
+			<ref bean="ConfigurationManager" />
+		</property>
+	</bean>
+
+	<bean id="OrderBusinessModelConverter" class="in.wtc.hcis.ip.common.OrderBusinessModelConverter">
+	</bean>
+
+<bean id="AdmissionOrder" class="in.wtc.hcis.ip.bo.order.AdmissionOrder">
+	<property name="admissionDAO">
+		<ref bean = "AdmissionDAOExtn" />
+	</property>
+	<property name="coreDataModelManager">
+		<ref bean = "DataModelManager" />
+	</property>
+	<property name="bedMasterDAO">
+		<ref bean = "BedMasterDAOExtn" />
+	</property>
+	<property name="converter">
+	  <ref bean = "IPDataModelConverter" />
+	</property>
+	<property name="dataModelManager">
+	  <ref bean = "IPDataModelManager" />
+	</property>
+	<property name="patientManager">
+			<ref bean="PatientManager" />
+	</property>
+	<property name="doctorManager">
+			<ref bean="DoctorManager" />
+	</property>
+	<property name="reportManager">
+			<ref bean="ReportManager" />
+	</property>
+</bean>
+
+<bean id="DoctorDischargeOrder" class="in.wtc.hcis.ip.bo.order.DoctorDischargeOrder">
+	<property name="admissionDAO">
+	<ref bean = "AdmissionDAOExtn" />
+	</property>
+	
+	<property name="dischargeOrderDAO">
+	<ref bean = "DischargeOrderDAOExtn" />
+	</property>
+	
+	<property name="dischargeActivityDAO">
+	<ref bean = "DischargeActivityDAO" />
+	</property>
+	
+	<property name="orderModelConverter">
+	<ref bean = "OrderBusinessModelConverter" />
+	</property>
+</bean>
+
+
+<bean id="InsuranceManager" class="in.wtc.hcis.ip.bo.insurance.InsuranceManagerImpl" >
+	<property name="converter">
+	  <ref bean = "IPDataModelConverter" />
+	</property>
+	<property name="dataModelManager">
+	  <ref bean = "IPDataModelManager" />
+	</property>
+	<property name="coreDataModelManager">
+	  <ref bean = "DataModelManager" />
+	</property>
+	<property name="claimSponsorDAO">
+	  <ref bean = "ClaimSponsorDAOExtn" />
+	</property>
+	<property name="insurancePlansDAO">
+	  <ref bean = "InsurancePlansDAOExtn" />
+	</property>
+	<property name="planCoversDiseaseDAO">
+	  <ref bean = "PlanCoversDiseaseDAO" />
+	</property>
+	<property name="planHasServicesDAO">
+	  <ref bean = "PlanHasServicesDAO" />
+	</property>
+	<property name="admissionClaimRequestDAO">
+	  <ref bean = "AdmissionClaimRequestDAOExtn" />
+	</property>
+	<property name="admissionClaimActivityDAO">
+	  <ref bean = "AdmissionClaimActivityDAOExtn" />
+	</property>
+	<property name="contactDetailsDAO">
+	  <ref bean = "ContactDetailsDAO" />
+	</property>
+	<property name="sponsorInsurerAssociationDAO">
+	  <ref bean = "SponsorInsurerAssociationDAO" />
+	</property>
+	<property name="claimSponsorSlaDAO">
+	  <ref bean = "ClaimSponsorSlaDAO" />
+	</property>
+	<property name="claimDocumentDAO">
+	  <ref bean = "ClaimDocumentDAO" />
+	</property>
+	<property name="diseaseDAO">
+	  <ref bean = "DiseaseDAOExtn" />
+	</property>
+	<property name="diseaseRequiresServiceDAO">
+	  <ref bean = "DiseaseRequiresServiceDAO" />
+	</property>
+	<property name="insurerDAO">
+	  <ref bean = "InsurerDAOExtn" />
+	</property>
+	<property name="admissionDAO">
+	  <ref bean = "AdmissionDAO" />
+	</property>
+	<property name="entityAcctMapDAO">
+	  <ref bean = "EntityAcctMapDAO" />
+	</property>
+	
+</bean>
+
+
+</beans>

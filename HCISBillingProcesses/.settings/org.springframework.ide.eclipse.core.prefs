@@ -1,0 +1,4 @@
+#Wed Nov 11 16:42:40 GMT+05:30 2009
+eclipse.preferences.version=1
+org.springframework.ide.eclipse.core.builders.enable.aopreferencemodelbuilder=true
+org.springframework.ide.eclipse.core.enable.project.preferences=true

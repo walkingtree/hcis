@@ -1,0 +1,29 @@
+from  ClaimSponsor as sponsor left join sponsor.sponsorInsurerAssociations as sia, ContactDetails as contact where sponsor.contactCode = contact.contactCode 
+##
+#if( $Util.isValid($sponsorName) == true)
+ and sponsor.sponsorsName like '%$sponsorName%' 
+#end
+##
+#if($Util.isValid($sponsorTypeCd) == true)
+ and sponsor.sponsorType.sponsorTypeCd like '$sponsorTypeCd' 
+#end
+##
+#if($Util.isValid($sponsorDescription) ==true)
+ and sponsor.sponsorDesc like  '$sponsorDescription' 
+#end
+##
+#if($Util.isValid($creditClassCode) ==true)
+ and sponsor.creditClass.creditClassCd like  '$creditClassCode' 
+#end
+##
+#if($Util.isValid($accountNumber) ==true)
+ and sponsor.accountNumber like  '$accountNumber' 
+#end
+##
+#if($Util.isValid($insurerName) ==true)
+ and sia.id.insurerName like  '$insurerName' 
+#end
+##
+#if($Util.isValid($orderBy) ==true)
+ order by  $orderBy 
+#end

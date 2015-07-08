@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="IPDataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://192.168.1.50:3306/hcisit"></property>
+		<property name="username" value="hcis"></property>
+		<property name="password" value="nirvikulp"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="IPDataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/wtc/hcis/da/RegistrationType.hbm.xml</value>
+				<value>com/wtc/hcis/da/Allergies.hbm.xml</value>
+				<value>com/wtc/hcis/da/BusinessRule.hbm.xml</value>
+				
+				<value>
+					com/wtc/hcis/da/RegistrationHistory.hbm.xml
+				</value>
+				
+				<value>com/wtc/hcis/da/BookingType.hbm.xml</value>
+				<value>com/wtc/hcis/da/BloodGroup.hbm.xml</value>
+				<value>com/wtc/hcis/da/Appointments.hbm.xml</value>
+				<value>com/wtc/hcis/da/ChangeReason.hbm.xml</value>
+				<value>com/wtc/hcis/da/MedicineType.hbm.xml</value>
+				<value>com/wtc/hcis/da/Marital.hbm.xml</value>
+				<value>com/wtc/hcis/da/TreatmentReason.hbm.xml</value>
+				<value>com/wtc/hcis/da/RegistrationStatus.hbm.xml</value>
+				<value>com/wtc/hcis/da/Relation.hbm.xml</value>
+				<value>com/wtc/hcis/da/Roster.hbm.xml</value>
+				<value>com/wtc/hcis/da/ReminderOptions.hbm.xml</value>
+				<value>com/wtc/hcis/da/Referral.hbm.xml</value>
+				<value>com/wtc/hcis/da/Samples.hbm.xml</value>
+				<value>com/wtc/hcis/da/Prescription.hbm.xml</value>
+				<value>com/wtc/hcis/da/Religion.hbm.xml</value>
+				<value>com/wtc/hcis/da/Nationality.hbm.xml</value>
+				<value>com/wtc/hcis/da/PatientRating.hbm.xml</value>
+				<value>
+					com/wtc/hcis/da/SecondaryConsultationCriteria.hbm.xml
+				</value>
+				<value>com/wtc/hcis/da/Brand.hbm.xml</value>
+				<value>com/wtc/hcis/da/MotherTongue.hbm.xml</value>
+				<value>com/wtc/hcis/da/Reminders.hbm.xml</value>
+				<value>com/wtc/hcis/da/ServiceStatus.hbm.xml</value>
+				<value>com/wtc/hcis/da/PatientAllergies.hbm.xml</value>
+				
+				<value>com/wtc/hcis/da/Observations.hbm.xml</value>
+				<value>com/wtc/hcis/da/PatientCategory.hbm.xml</value>
+				<value>com/wtc/hcis/da/PatientDetails.hbm.xml</value>
+				<value>com/wtc/hcis/da/AppointmentHistory.hbm.xml</value>
+				<value>com/wtc/hcis/da/Service.hbm.xml</value>
+				<value>com/wtc/hcis/da/Duration.hbm.xml</value>
+				<value>com/wtc/hcis/da/Medicines.hbm.xml</value>
+				<value>com/wtc/hcis/da/ContactDetails.hbm.xml</value>
+				<value>com/wtc/hcis/da/SampleMaster.hbm.xml</value>
+				<value>com/wtc/hcis/da/ContactType.hbm.xml</value>
+				<value>com/wtc/hcis/da/Patient.hbm.xml</value>
+				<value>com/wtc/hcis/da/Room.hbm.xml</value>
+				<value>com/wtc/hcis/da/Record.hbm.xml</value>
+				<value>com/wtc/hcis/da/Emergency.hbm.xml</value>
+				<value>com/wtc/hcis/da/Gender.hbm.xml</value>
+				<value>com/wtc/hcis/da/IdProofs.hbm.xml</value>
+				<value>com/wtc/hcis/da/Country.hbm.xml</value>
+				<value>com/wtc/hcis/da/Saluation.hbm.xml</value>
+				<value>com/wtc/hcis/da/State.hbm.xml</value>
+				<value>com/wtc/hcis/da/AppEntities.hbm.xml</value>
+				<value>com/wtc/hcis/da/EntityContactCode.hbm.xml</value>
+				<value>com/wtc/hcis/da/DoctorEspecialty.hbm.xml</value>
+				<value>com/wtc/hcis/da/DoctorDetail.hbm.xml</value>
+				<value>com/wtc/hcis/da/DefaultReminders.hbm.xml</value>
+				<value>com/wtc/hcis/da/AssignedServices.hbm.xml</value>
+				<value>com/wtc/hcis/da/Department.hbm.xml</value>
+				<value>com/wtc/hcis/da/ServiceGroup.hbm.xml</value>
+				<value>com/wtc/hcis/da/Doctor.hbm.xml</value>
+				<value>
+					com/wtc/hcis/da/AssignedServiceHistory.hbm.xml
+				</value>
+				<value>com/wtc/hcis/da/Especialty.hbm.xml</value>
+				<value>com/wtc/hcis/da/AppointmentStatus.hbm.xml</value>
+				<value>com/wtc/hcis/da/Status.hbm.xml</value>
+				<value>
+					com/wtc/hcis/da/PrescriptionMedicineAssoc.hbm.xml
+				</value>
+				<value>com/wtc/hcis/da/RenderedService.hbm.xml</value>
+				<value>com/wtc/hcis/da/ServicePackage.hbm.xml</value>
+				<value>com/wtc/hcis/da/Immunization.hbm.xml</value>
+				<value>
+					com/wtc/hcis/da/ServicePackageStatus.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/da/AssignedPackageStatus.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/da/PatientImmunization.hbm.xml
+				</value>
+				<value>com/wtc/hcis/da/PackageHasService.hbm.xml</value>
+				<value>com/wtc/hcis/da/AssignedPackage.hbm.xml</value>
+				<value>
+					com/wtc/hcis/da/AssignedServiceStatus.hbm.xml
+				</value>
+				<value>com/wtc/hcis/da/SystemParameter.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/CreditClass.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/NursingUnitType.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/BedEnvelope.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/DischargeType.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderGroup.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/BedMaster.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/FeedbackType.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/BedType.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderStatus.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/OrderAttributeValue.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/AdmissionStatus.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/SponsorType.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/BedReservation.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/Disease.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/DischargeOrder.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderTemplateDetails.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/ActionStatus.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/PlanHasServices.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/SponsorInsurerAssociation.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/NursingUnit.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/Admission.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/SponsorClaimStatus.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderType.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderDetails.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/Feedback.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/BedStatus.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/Attribute.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/OrderTypeHasAttributes.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/BedSpecialFeature.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/BedEnvelopeHasPool.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/Insurer.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderTemplate.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/BedActivity.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/BedPoolHasUnitType.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/ClaimSponsorSla.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/BedReservationSpecialFeatures.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderGroupHasTemplate.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/AdmissionEntryPoint.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/ClaimSponsor.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/DiseaseRequiresService.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/DoctorOrder.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/DoctorOrderActivity.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/AdmissionActivity.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/ReservationStatus.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/BedHasSpecialFeatures.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/InsurancePlans.hbm.xml</value>
+				<value>com/wtc/hcis/ip/da/BedPool.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/AdmissionClaimRequest.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/ClaimDocument.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/AdmissionClaimActivity.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/DischargeActivity.hbm.xml
+				</value>
+				<value>
+					com/wtc/hcis/ip/da/PlanCoversDisease.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/ActivityType.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/BedReservationActivity.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/Vaccine.hbm.xml</value>
+				<value>
+					com/wtc/hcis/ip/da/ScheduleDetails.hbm.xml
+				</value>
+				<value>com/wtc/hcis/ip/da/Schedule.hbm.xml</value>
+				<!-- Acounting related mapping list -->
+				<value>
+					in/wtc/accountant/da/AcFnclAccountNumber.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcBankBranchAccount.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcPymtRcpt.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcBank.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptMethod.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcEntityType.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcCurrency.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcBankBranch.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcInterestApplied.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcDepositRefund.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcPayable.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcFnclAccountType.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcPayableAsgm.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcRcvblInterest.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcPayableInterest.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcCust.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcVendor.hbm.xml</value>
+				<value>in/wtc/accountant/da/AcAdjustment.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptAttrDetails.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcGenlJrnl.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptDetails.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcBill.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcPymtRcptAttr.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcDepositAsgm.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcReceivable.hbm.xml</value>
+				<value>
+					in/wtc/accountant/da/AcDepositRequest.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcAdjustmentType.hbm.xml
+				</value>
+				<value>
+					in/wtc/accountant/da/AcReceivableAsgm.hbm.xml
+				</value>
+				<value>in/wtc/accountant/da/AcAccount.hbm.xml</value>
+				</list>
+		</property></bean>
+	<bean id="RegistrationTypeDAO"
+		class="com.wtc.hcis.da.RegistrationTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AllergiesDAO" class="com.wtc.hcis.da.AllergiesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BusinessRuleDAO" class="com.wtc.hcis.da.BusinessRuleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RegistrationHistoryDAO"
+		class="com.wtc.hcis.da.RegistrationHistoryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	
+	<bean id="BookingTypeDAO" class="com.wtc.hcis.da.BookingTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BloodGroupDAO" class="com.wtc.hcis.da.BloodGroupDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="ChangeReasonDAO" class="com.wtc.hcis.da.ChangeReasonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MedicineTypeDAO" class="com.wtc.hcis.da.MedicineTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MaritalDAO" class="com.wtc.hcis.da.MaritalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TreatmentReasonDAO"
+		class="com.wtc.hcis.da.TreatmentReasonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RegistrationStatusDAO"
+		class="com.wtc.hcis.da.RegistrationStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RelationDAO" class="com.wtc.hcis.da.RelationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="ReminderOptionsDAO"
+		class="com.wtc.hcis.da.ReminderOptionsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ReferralDAO" class="com.wtc.hcis.da.ReferralDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SamplesDAO" class="com.wtc.hcis.da.SamplesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PrescriptionDAO" class="com.wtc.hcis.da.PrescriptionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ReligionDAO" class="com.wtc.hcis.da.ReligionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NationalityDAO" class="com.wtc.hcis.da.NationalityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientRatingDAO"
+		class="com.wtc.hcis.da.PatientRatingDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SecondaryConsultationCriteriaDAO"
+		class="com.wtc.hcis.da.SecondaryConsultationCriteriaDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BrandDAO" class="com.wtc.hcis.da.BrandDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BrandDAOExtn" class="com.wtc.hcis.da.extn.BrandDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MotherTongueDAO" class="com.wtc.hcis.da.MotherTongueDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RemindersDAO" class="com.wtc.hcis.da.RemindersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceStatusDAO"
+		class="com.wtc.hcis.da.ServiceStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientAllergiesDAO"
+		class="com.wtc.hcis.da.PatientAllergiesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ObservationsDAO" class="com.wtc.hcis.da.ObservationsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientCategoryDAO"
+		class="com.wtc.hcis.da.PatientCategoryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientDetailsDAO"
+		class="com.wtc.hcis.da.PatientDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceDAO" class="com.wtc.hcis.da.ServiceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DurationDAO" class="com.wtc.hcis.da.DurationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MedicinesDAO" class="com.wtc.hcis.da.MedicinesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MedicinesDAOExtn" class="com.wtc.hcis.da.extn.MedicinesDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ContactDetailsDAO"
+		class="com.wtc.hcis.da.ContactDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SampleMasterDAO" class="com.wtc.hcis.da.SampleMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ContactTypeDAO" class="com.wtc.hcis.da.ContactTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientDAOExtn" class="com.wtc.hcis.da.extn.PatientDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RoomDAO" class="com.wtc.hcis.da.RoomDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RecordDAO" class="com.wtc.hcis.da.RecordDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmergencyDAO" class="com.wtc.hcis.da.EmergencyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+    
+    <bean id="AppointmentHistoryDAO"
+		class="com.wtc.hcis.da.AppointmentHistoryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IdProofsDAO" class="com.wtc.hcis.da.IdProofsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CountryDAO" class="com.wtc.hcis.da.CountryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SaluationDAO" class="com.wtc.hcis.da.SaluationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StateDAO" class="com.wtc.hcis.da.StateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AppEntitiesDAO" class="com.wtc.hcis.da.AppEntitiesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EntityContactCodeDAOExtn" class="com.wtc.hcis.da.extn.EntityContactCodeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorEspecialtyDAO"
+		class="com.wtc.hcis.da.DoctorEspecialtyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorDetailDAO"
+		class="com.wtc.hcis.da.DoctorDetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DefaultRemindersDAO"
+		class="com.wtc.hcis.da.DefaultRemindersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AssignedServicesDAO"
+		class="com.wtc.hcis.da.AssignedServicesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DepartmentDAO" class="com.wtc.hcis.da.DepartmentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceGroupDAO" class="com.wtc.hcis.da.ServiceGroupDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorDAO" class="com.wtc.hcis.da.DoctorDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AssignedServiceHistoryDAO"
+		class="com.wtc.hcis.da.AssignedServiceHistoryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EspecialtyDAO" class="com.wtc.hcis.da.EspecialtyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AppointmentStatusDAO" class="com.wtc.hcis.da.AppointmentStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="GenderDAO" class="com.wtc.hcis.da.GenderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientDAO" class="com.wtc.hcis.da.PatientDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EntityContactCodeDAO"
+		class="com.wtc.hcis.da.EntityContactCodeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RosterDAO" class="com.wtc.hcis.da.RosterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="AppointmentsDAO"
+		class="com.wtc.hcis.da.AppointmentsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+
+	</bean>
+	
+	<bean id="DoctorDAOExtn" class="com.wtc.hcis.da.extn.DoctorDAOExtn">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	<property name="UIDBFieldMapForOrder">
+		<map>
+			<entry key="doctorId" value="doctorId"></entry>
+			<entry key="doctorName" value="fullName"></entry>
+			<entry key="gender" value="doctorDetails.gender.genderCode"></entry>
+			<entry key="knownLanguages" value="doctorDetails.knownLanguages"></entry>
+			<entry key="department" value="de.department.departmentCode"></entry>
+			<entry key="especiality" value="de.especialty.especialtyCode"></entry>
+			<entry key="roomNo" value="de.room.roomCode"></entry>
+			<entry key="consultationCharge" value="de.consultationCharge"></entry>
+			<entry key="parmanent" value="doctorDetails.permanent"></entry>
+		</map>
+	</property>
+	</bean>
+	
+	<bean id="AppointmentHistoryDAOExtn" class="com.wtc.hcis.da.extn.AppointmentHistoryDAOExtn">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	
+	<bean id="AppointmentsDAOExtn" class="com.wtc.hcis.da.extn.AppointmentsDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceDAOExtn" class="com.wtc.hcis.da.extn.ServiceDAOExtn">
+	<property name="sessionFactory">
+
+			<ref bean="sessionFactory" />
+			</property>
+	</bean>
+	<bean id="serviceGroupDAOExtn" class="com.wtc.hcis.da.extn.ServiceGroupDAOExtn">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+	</property>
+	</bean>
+	
+
+	<bean id="PrescriptionDAOExtn" class="com.wtc.hcis.da.extn.PrescriptionDAOExtn">
+	        <property name="sessionFactory">
+	        <ref bean="sessionFactory"/>
+	        </property>
+	</bean>
+
+	<bean id="RosterDAOExtn" class="com.wtc.hcis.da.extn.RosterDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	
+	<bean id="StatusDAO" class="com.wtc.hcis.da.StatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PrescriptionMedicineAssocDAO"
+		class="com.wtc.hcis.da.PrescriptionMedicineAssocDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RenderedServiceDAO"
+		class="com.wtc.hcis.da.RenderedServiceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServicePackageDAO"
+		class="com.wtc.hcis.da.ServicePackageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ImmunizationDAO"
+		class="com.wtc.hcis.da.ImmunizationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServicePackageStatusDAO"
+		class="com.wtc.hcis.da.ServicePackageStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AssignedPackageStatusDAO"
+		class="com.wtc.hcis.da.AssignedPackageStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PatientImmunizationDAO"
+		class="com.wtc.hcis.da.PatientImmunizationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PackageHasServiceDAO"
+		class="com.wtc.hcis.da.PackageHasServiceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AssignedPackageDAO"
+		class="com.wtc.hcis.da.AssignedPackageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AssignedServiceStatusDAO"
+		class="com.wtc.hcis.da.AssignedServiceStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SystemParameterDAO"
+		class="com.wtc.hcis.da.SystemParameterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+		<bean id="AssignedServicesDAOExtn"
+		class="com.wtc.hcis.da.extn.AssignedServicesDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+		<bean id="ServicePackageDAOExtn"
+		class="com.wtc.hcis.da.extn.ServicePackageDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AssignedPackageDAOExtn"
+		class="com.wtc.hcis.da.extn.AssignedPackageDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RenderedServiceDAOExtn"
+		class="com.wtc.hcis.da.extn.RenderedServiceDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CreditClassDAO"
+		class="com.wtc.hcis.ip.da.CreditClassDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NursingUnitTypeDAO"
+		class="com.wtc.hcis.ip.da.NursingUnitTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedEnvelopeDAO"
+		class="com.wtc.hcis.ip.da.BedEnvelopeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DischargeTypeDAO"
+		class="com.wtc.hcis.ip.da.DischargeTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderGroupDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderGroupDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedMasterDAO" class="com.wtc.hcis.ip.da.BedMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FeedbackTypeDAO"
+		class="com.wtc.hcis.ip.da.FeedbackTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedTypeDAO" class="com.wtc.hcis.ip.da.BedTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderStatusDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OrderAttributeValueDAO"
+		class="com.wtc.hcis.ip.da.OrderAttributeValueDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdmissionStatusDAO"
+		class="com.wtc.hcis.ip.da.AdmissionStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SponsorTypeDAO"
+		class="com.wtc.hcis.ip.da.SponsorTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedReservationDAO"
+		class="com.wtc.hcis.ip.da.BedReservationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedReservationDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.BedReservationDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DiseaseDAO" class="com.wtc.hcis.ip.da.DiseaseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DischargeOrderDAO"
+		class="com.wtc.hcis.ip.da.DischargeOrderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderTemplateDetailsDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderTemplateDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ActionStatusDAO"
+		class="com.wtc.hcis.ip.da.ActionStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PlanHasServicesDAO"
+		class="com.wtc.hcis.ip.da.PlanHasServicesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SponsorInsurerAssociationDAO"
+		class="com.wtc.hcis.ip.da.SponsorInsurerAssociationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NursingUnitDAO"
+		class="com.wtc.hcis.ip.da.NursingUnitDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdmissionDAO" class="com.wtc.hcis.ip.da.AdmissionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SponsorClaimStatusDAO"
+		class="com.wtc.hcis.ip.da.SponsorClaimStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderTypeDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderDetailsDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FeedbackDAO" class="com.wtc.hcis.ip.da.FeedbackDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedStatusDAO" class="com.wtc.hcis.ip.da.BedStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AttributeDAO" class="com.wtc.hcis.ip.da.AttributeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OrderTypeHasAttributesDAO"
+		class="com.wtc.hcis.ip.da.OrderTypeHasAttributesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedSpecialFeatureDAO"
+		class="com.wtc.hcis.ip.da.BedSpecialFeatureDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedEnvelopeHasPoolDAO"
+		class="com.wtc.hcis.ip.da.BedEnvelopeHasPoolDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="InsurerDAO" class="com.wtc.hcis.ip.da.InsurerDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderTemplateDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderTemplateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedActivityDAO"
+		class="com.wtc.hcis.ip.da.BedActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedPoolHasUnitTypeDAO"
+		class="com.wtc.hcis.ip.da.BedPoolHasUnitTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ClaimSponsorSlaDAO"
+		class="com.wtc.hcis.ip.da.ClaimSponsorSlaDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedReservationSpecialFeaturesDAO"
+		class="com.wtc.hcis.ip.da.BedReservationSpecialFeaturesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderGroupHasTemplateDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderGroupHasTemplateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdmissionEntryPointDAO"
+		class="com.wtc.hcis.ip.da.AdmissionEntryPointDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ClaimSponsorDAO"
+		class="com.wtc.hcis.ip.da.ClaimSponsorDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DiseaseRequiresServiceDAO"
+		class="com.wtc.hcis.ip.da.DiseaseRequiresServiceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DoctorOrderActivityDAO"
+		class="com.wtc.hcis.ip.da.DoctorOrderActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdmissionActivityDAO"
+		class="com.wtc.hcis.ip.da.AdmissionActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ReservationStatusDAO"
+		class="com.wtc.hcis.ip.da.ReservationStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedHasSpecialFeaturesDAO"
+		class="com.wtc.hcis.ip.da.BedHasSpecialFeaturesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="InsurancePlansDAO"
+		class="com.wtc.hcis.ip.da.InsurancePlansDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedPoolDAO" class="com.wtc.hcis.ip.da.BedPoolDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdmissionClaimRequestDAO"
+		class="com.wtc.hcis.ip.da.AdmissionClaimRequestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ClaimDocumentDAO"
+		class="com.wtc.hcis.ip.da.ClaimDocumentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdmissionClaimActivityDAO"
+		class="com.wtc.hcis.ip.da.AdmissionClaimActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DischargeActivityDAO"
+		class="com.wtc.hcis.ip.da.DischargeActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PlanCoversDiseaseDAO"
+		class="com.wtc.hcis.ip.da.PlanCoversDiseaseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ActivityTypeDAO"
+		class="com.wtc.hcis.ip.da.ActivityTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedReservationActivityDAO"
+			class="com.wtc.hcis.ip.da.BedReservationActivityDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory" />
+			</property>
+		</bean>
+	<bean id="BedMasterDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.BedMasterDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedEnvelopeDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.BedEnvelopeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BedEnvelopeHasPoolDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.BedEnvelopeHasPoolDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="BedPoolDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.BedPoolDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="BedPoolHasUnitTypeDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.BedPoolHasUnitTypeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+		<bean id="DoctorOrderDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.DoctorOrderDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+		<bean id="DischargeOrderDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.DischargeOrderDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+		<bean id="DoctorOrderGroupDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.DoctorOrderGroupDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+		<bean id="DoctorOrderTemplateDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.DoctorOrderTemplateDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+		<bean id="AdmissionDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.AdmissionDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="AdmissionClaimRequestDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.AdmissionClaimRequestDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="UIDBFieldMapForOrder">
+		<map>
+			<entry key="requestSequenceNbr" value="requestSequenceNbr"></entry>
+			<entry key="claimStatusCdDesc" value="sponsorClaimStatus.claimStatusDesc"></entry>
+			<entry key="admissionReqNbr" value="admission.admissionReqNbr"></entry>
+			<entry key="sponsorName" value="claimSponsor.sponsorsName"></entry>
+			<entry key="insurerName" value="insurer.insurerName"></entry>
+			<entry key="planName" value="insurancePlans.planName"></entry>
+			<entry key="policyNbr" value="policyNbr"></entry>
+			<entry key="requestDtm" value="requestDtm"></entry>
+			<entry key="approvalDate" value="approvalDtm"></entry>
+			<entry key="requestedAmount" value="requestedAmount"></entry>
+			<entry key="approvedAmount" value="approvedAmount"></entry>
+			<entry key="finalClaimedAmount" value="finalClaimedAmount"></entry>
+			<entry key="patientAmount" value="patientAmount"></entry>
+		</map>
+	</property>
+	</bean>	
+  		
+   <bean id="InsurancePlansDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.InsurancePlansDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="ClaimSponsorDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.ClaimSponsorDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="UIDBFieldMapForOrder">
+		<map>
+			<entry key="sponsorsName" value="sponsorsName"></entry>
+			<entry key="sponsorDesc" value="sponsorDesc"></entry>
+			<entry key="sponsorTypeDesc" value="sponsorType.sponsorDesc"></entry>
+			<entry key="creditClassDesc" value="creditClass.description"></entry>
+			<entry key="contactPerson" value="contact.firstName"></entry>
+			<entry key="contactNumber" value="contact.contactNumber"></entry>
+			
+		</map>
+	</property>
+	</bean>	
+	<bean id="AdmissionClaimActivityDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.AdmissionClaimActivityDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+		<bean id="InsurerDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.InsurerDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="UIDBFieldMapForOrder">
+			<map>
+				<entry key="insurerName" value="insurerName"></entry>
+				<entry key="insurerDesc" value="insurerDesc"></entry>
+				<entry key="contactPerson" value="contact.firstName"></entry>
+				<entry key="contactNumber" value="contact.contactNumber"></entry>
+			</map>
+		</property>
+	</bean>
+		<bean id="DiseaseDAOExtn"
+		class="com.wtc.hcis.ip.da.extn.DiseaseDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+		<bean id="VaccineDAO" class="com.wtc.hcis.ip.da.VaccineDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory" />
+			</property>
+		</bean>
+		<bean id="ScheduleDetailsDAO"
+			class="com.wtc.hcis.ip.da.ScheduleDetailsDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory" />
+			</property>
+		</bean>
+		<bean id="ScheduleDAO" class="com.wtc.hcis.ip.da.ScheduleDAO">
+			<property name="sessionFactory">
+				<ref bean="sessionFactory" />
+			</property>
+		</bean>
+	
+	<!-- Accounting related sutffs -->
+	<bean id="AcFnclAccountNumberDAO"
+		class="in.wtc.accountant.da.AcFnclAccountNumberDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBankBranchAccountDAO"
+		class="in.wtc.accountant.da.AcBankBranchAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptDAO"
+		class="in.wtc.accountant.da.AcPymtRcptDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBankDAO" class="in.wtc.accountant.da.AcBankDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptMethodDAO"
+		class="in.wtc.accountant.da.AcPymtRcptMethodDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcEntityTypeDAO"
+		class="in.wtc.accountant.da.AcEntityTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcCurrencyDAO"
+		class="in.wtc.accountant.da.AcCurrencyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBankBranchDAO"
+		class="in.wtc.accountant.da.AcBankBranchDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcInterestAppliedDAO"
+		class="in.wtc.accountant.da.AcInterestAppliedDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcDepositRefundDAO"
+		class="in.wtc.accountant.da.AcDepositRefundDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPayableDAO" class="in.wtc.accountant.da.AcPayableDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcFnclAccountTypeDAO"
+		class="in.wtc.accountant.da.AcFnclAccountTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPayableAsgmDAO"
+		class="in.wtc.accountant.da.AcPayableAsgmDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcRcvblInterestDAO"
+		class="in.wtc.accountant.da.AcRcvblInterestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPayableInterestDAO"
+		class="in.wtc.accountant.da.AcPayableInterestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcCustDAO" class="in.wtc.accountant.da.AcCustDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcVendorDAO" class="in.wtc.accountant.da.AcVendorDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcAdjustmentDAO"
+		class="in.wtc.accountant.da.AcAdjustmentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptAttrDetailsDAO"
+		class="in.wtc.accountant.da.AcPymtRcptAttrDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcGenlJrnlDAO"
+		class="in.wtc.accountant.da.AcGenlJrnlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptDetailsDAO"
+		class="in.wtc.accountant.da.AcPymtRcptDetailsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcBillDAO" class="in.wtc.accountant.da.AcBillDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcPymtRcptAttrDAO"
+		class="in.wtc.accountant.da.AcPymtRcptAttrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcDepositAsgmDAO"
+		class="in.wtc.accountant.da.AcDepositAsgmDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcReceivableDAO"
+		class="in.wtc.accountant.da.AcReceivableDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcDepositRequestDAO"
+		class="in.wtc.accountant.da.AcDepositRequestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcAdjustmentTypeDAO"
+		class="in.wtc.accountant.da.AcAdjustmentTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcReceivableAsgmDAO"
+		class="in.wtc.accountant.da.AcReceivableAsgmDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcAccountDAO" class="in.wtc.accountant.da.AcAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AccountDAOExtn" class="in.wtc.accountant.da.extn.AccountDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdjustmentDAOExtn" class="in.wtc.accountant.da.extn.AdjustmentDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BankBranchAccountDAOExtn" class="in.wtc.accountant.da.extn.BankBranchAccountDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdjustmentTypeDAOExtn" class="in.wtc.accountant.da.extn.AdjustmentTypeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BankBranchDAOExtn" class="in.wtc.accountant.da.extn.BankBranchDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BankDAOExtn" class="in.wtc.accountant.da.extn.BankDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="FnclAccountNumberDAOExtn" class="in.wtc.accountant.da.extn.FnclAccountNumberDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+		<bean id="FnclAccountTypeDAOExtn" class="in.wtc.accountant.da.extn.FnclAccountTypeDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		</bean>
+		<bean id="PayableDAOExtn" class="in.wtc.accountant.da.extn.PayableDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		</bean>
+		<bean id="PymtRcptDAOExtn" class="in.wtc.accountant.da.extn.PymtRcptDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean>
+		<bean id="ReceivableDAOExtn" class="in.wtc.accountant.da.extn.ReceivableDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean>
+		<bean id="DepositRequestDAOExtn" class="in.wtc.accountant.da.extn.DepositRequestDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean><bean id="DepositAsgmDAOExtn" class="in.wtc.accountant.da.extn.DepositAsgmDAOExtn">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>	
+		</bean>
+		
+	</beans>

@@ -1,0 +1,22 @@
+#
+#Thu Oct 29 15:29:49 IST 2009
+genBasicCompId=true
+sessionFactoryName=in.wtc.hcis.da.HibernateSessionFactory
+profile=
+daoSFId=sessionFactory
+version=3.2
+jndiPath=
+detectM2M=true
+reStrategyClass=
+springDaoFile=src/applicationContext.xml
+useJavaTypes=true
+keyGenerator=assigned
+libInstallFolder=/lib
+addLibs2Project=true
+genVersionTag=true
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+reSettingsFile=/HCISCoreDA/hibernate.reveng.xml
+configFile=/HCISCoreDA/src/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="userManagementController" class="in.wtc.ui.controller.UserManagementController">
+		<property name="userManager" ref="userManagerService">
+		</property>
+	</bean>
+	<bean id="roleManagementController" class="in.wtc.ui.controller.RoleManagementController">
+		<property name="roleManager" ref="roleManagerService"></property>
+	</bean>
+
+	<bean id="BrandManagementController" 
+          class="in.wtc.ui.controller.BrandManagementController">
+          <property name="brandManager" ref="BrandManager"></property>
+    </bean>
+    <bean id="MedicineManagementController" 
+    	  class="in.wtc.ui.controller.MedicineManagementController">
+    	  <property name="medicineManager" ref="MedicineManager"></property>
+    </bean>
+    
+    <bean id="PatientManagementController" 
+	      class="in.wtc.ui.controller.PatientManagementController">
+	      <property name="patientManager" ref="PatientManager"></property>
+	      <property name="registrationManager" ref="RegistrationManager"></property>
+	</bean>
+	
+	<bean id="AppointmentManagementController" 
+	      class="in.wtc.ui.controller.AppointmentManagementController">
+	      <property name="appointmentManager" ref="AppointmentManager"></property>
+	      <property name="rosterManager" ref="RosterManager"></property>
+	      <property name="patientManager" ref="PatientManager"></property>
+	      <property name="prescriptionManager" ref="PrescriptionManager"></property>
+	      <property name="observationManager" ref="ObservationManager"></property>
+	      <property name="serviceManager" ref="ServiceManager"></property>
+	      <property name="doctorManager" ref="DoctorManager"></property>
+	      <property name="configurationManager" ref="ConfigurationManager"></property>
+	</bean>
+	
+	<bean id="TreatmentHistoryController" 
+	      class="in.wtc.ui.controller.TreatmentHistoryController">
+	      <property name="appointmentManager" ref="AppointmentManager"></property>
+	</bean>
+	
+	<bean id="MedicalPrescriptionController" 
+	      class="in.wtc.ui.controller.MedicalPrescriptionController">
+	      <property name="prescriptionManager" ref="PrescriptionManager"></property>
+	      <property name="observationManager" ref="ObservationManager"></property>
+	</bean>
+    
+    <bean id="DoctorManagementController" 
+	      class="in.wtc.ui.controller.DoctorManagementController">
+	      <property name="doctorManager" ref="DoctorManager"></property>
+	</bean>
+	
+	<bean id="RosterManagementController" 
+    		class="in.wtc.ui.controller.RosterManagementController">
+			<property name="rosterManager" ref="RosterManager"></property>
+	</bean>
+
+	<bean id="FileUploader" 	class="in.wtc.ui.controller.FileUploader">
+
+	</bean>
+</beans>

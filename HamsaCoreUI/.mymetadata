@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="HamsaUI"
+  id="myeclipse.1261398612437"
+  context-root="/HamsaUI"
+  j2ee-spec="5.0"
+  archive="HamsaUI.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="DoctorWiseServiceAssignment"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="AllSectionsNoDetail"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="separator" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[java.io.File.separator]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportsDirPath" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="fromDate" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="toDate" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="doctorId" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT
+     assigned_services.`SERVICE_UID` AS assigned_services_SERVICE_UID,
+     assigned_services.`SERVICE_CODE` AS assigned_services_SERVICE_CODE,
+     SUM(assigned_services.`REQUESTED_UNITS`)AS assigned_services_REQUESTED_UNITS,
+     SUM(assigned_services.`RENDERED_UNITS`)AS assigned_services_RENDERED_UNITS,
+     SUM(assigned_services.`CANCELED_UNITS`)AS assigned_services_CANCELED_UNITS,
+     SUM(assigned_services.`SERVICE_CHARGE`)AS assigned_services_SERVICE_CHARGE,
+     assigned_services.`REFERENCE_TYPE` AS assigned_services_REFERENCE_TYPE,
+     assigned_services.`REFERENCE_NUMBER` AS assigned_services_REFERENCE_NUMBER,
+     service.`SERVICE_CODE` AS service_SERVICE_CODE,
+     service.`SERVICE_NAME` AS service_SERVICE_NAME,
+     service.`DEPARTMENT_CODE` AS service_DEPARTMENT_CODE,
+     assigned_services.`CREATE_DTM` AS assigned_services_CREATE_DTM,
+     doctor.`DOCTOR_ID` AS doctor_DOCTOR_ID,
+     doctor.`FULL_NAME` AS doctor_FULL_NAME
+FROM
+     `service` service INNER JOIN `assigned_services` assigned_services ON service.`SERVICE_CODE` = assigned_services.`SERVICE_CODE`
+     INNER JOIN `doctor` doctor ON assigned_services.`DOCTOR_ID` = doctor.`DOCTOR_ID`
+
+WHERE
+
+((($P{fromDate} IS NULL)  OR ($P{fromDate} = ''))  OR (assigned_services.`CREATE_DTM` >= (str_to_date($P{fromDate},"%d/%m/%Y"))))
+ AND (($P{toDate} IS NULL)  OR ($P{toDate} = '')  OR (assigned_services.`CREATE_DTM` <= (str_to_date($P{toDate},"%d/%m/%Y"))))
+ AND ( (($P{doctorId} IS NULL)OR( ($P{doctorId} = '' )) OR (doctor.`DOCTOR_ID` = $P{doctorId})))
+GROUP BY
+     doctor_DOCTOR_ID
+
+ORDER BY
+     service_DEPARTMENT_CODE ASC,
+     service_SERVICE_CODE ASC]]></queryString>
+
+	<field name="assigned_services_SERVICE_UID" class="java.lang.Integer"/>
+	<field name="assigned_services_SERVICE_CODE" class="java.lang.String"/>
+	<field name="assigned_services_REQUESTED_UNITS" class="java.lang.Integer"/>
+	<field name="assigned_services_RENDERED_UNITS" class="java.lang.Integer"/>
+	<field name="assigned_services_CANCELED_UNITS" class="java.lang.Integer"/>
+	<field name="assigned_services_SERVICE_CHARGE" class="java.lang.Double"/>
+	<field name="assigned_services_REFERENCE_TYPE" class="java.lang.String"/>
+	<field name="assigned_services_REFERENCE_NUMBER" class="java.lang.String"/>
+	<field name="service_SERVICE_CODE" class="java.lang.String"/>
+	<field name="service_SERVICE_NAME" class="java.lang.String"/>
+	<field name="service_DEPARTMENT_CODE" class="java.lang.String"/>
+	<field name="assigned_services_CREATE_DTM" class="java.sql.Timestamp"/>
+	<field name="doctor_DOCTOR_ID" class="java.lang.Integer"/>
+	<field name="doctor_FULL_NAME" class="java.lang.String"/>
+
+	<variable name="requested" class="java.lang.Integer" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{assigned_services_REQUESTED_UNITS}]]></variableExpression>
+	</variable>
+	<variable name="rendered" class="java.lang.Integer" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{assigned_services_RENDERED_UNITS}]]></variableExpression>
+	</variable>
+	<variable name="cancelled" class="java.lang.Integer" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{assigned_services_RENDERED_UNITS}]]></variableExpression>
+	</variable>
+	<variable name="serviceCharge" class="java.lang.Double" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{assigned_services_SERVICE_CHARGE}]]></variableExpression>
+	</variable>
+
+		<group  name="doctorGroup" >
+			<groupExpression><![CDATA[$F{doctor_DOCTOR_ID}]]></groupExpression>
+			<groupHeader>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="1"
+						y="0"
+						width="534"
+						height="20"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="textField-6"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[" Dr. "+($F{doctor_FULL_NAME}!= null ?$F{doctor_FULL_NAME}:"")]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="222"
+						y="0"
+						width="78"
+						height="20"
+						key="textField-2"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{requested}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="300"
+						y="0"
+						width="78"
+						height="20"
+						key="textField-3"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{rendered}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="378"
+						y="0"
+						width="78"
+						height="20"
+						key="textField-4"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{cancelled}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="456"
+						y="0"
+						width="78"
+						height="20"
+						key="textField-5"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{serviceCharge}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="145"
+						y="0"
+						width="72"
+						height="20"
+						key="staticText-9"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[Sub total:]]></text>
+				</staticText>
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="40"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="71"
+						y="0"
+						width="463"
+						height="40"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText-10"/>
+					<box>					<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="25" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Walking Tree Consultancy Services]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="4"
+						y="0"
+						width="65"
+						height="38"
+						key="image-1"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{reportsDirPath}+ $P{separator}+ "images"+$P{separator}+"WTC_logo.JPG"]]></imageExpression>
+				</image>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="47"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1"
+						y="7"
+						width="534"
+						height="40"
+						forecolor="#FFFFFF"
+						backcolor="#A7C1CE"
+						key="staticText-11"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="14" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[DOCTOR WISE SERVICE ASSIGNMENT]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="184"
+						y="28"
+						width="83"
+						height="16"
+						key="textField-7">
+							<printWhenExpression><![CDATA[new Boolean($P{fromDate} != null && $P{fromDate}.length() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["From :"+$P{fromDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="278"
+						y="28"
+						width="91"
+						height="16"
+						key="textField-9"
+						isPrintWhenDetailOverflows="true">
+							<printWhenExpression><![CDATA[new Boolean(($P{fromDate} != null && $P{fromDate}.length() > 0)||($P{toDate} != null && $P{toDate}.length() > 0))]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[" up to:" +(($P{toDate} != null && $P{toDate}.length()>0)?$P{toDate}:" Today")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="231"
+						y="28"
+						width="72"
+						height="16"
+						key="textField-10">
+							<printWhenExpression><![CDATA[new Boolean(($P{fromDate} == null || $P{fromDate}.length()<1)&&($P{toDate} == null || $P{toDate}.length()<1))]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["For all dates"]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="27"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1"
+						y="0"
+						width="81"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-12"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[SERVICE CODE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="82"
+						y="0"
+						width="140"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-24"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[SERVICE NAME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="222"
+						y="0"
+						width="78"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-25"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[REQUESTED UNITS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="300"
+						y="0"
+						width="78"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-26"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[RENDERED UNITS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="378"
+						y="0"
+						width="78"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-27"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[CANCELLED UNITS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="456"
+						y="0"
+						width="78"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-28"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[SERVICE
+CHARGE]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="19"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="154"
+						y="-50"
+						width="0"
+						height="0"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="82"
+						y="0"
+						width="140"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{service_SERVICE_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="222"
+						y="0"
+						width="78"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{assigned_services_REQUESTED_UNITS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="300"
+						y="0"
+						width="78"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{assigned_services_RENDERED_UNITS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="378"
+						y="0"
+						width="77"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{assigned_services_CANCELED_UNITS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="455"
+						y="0"
+						width="79"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{assigned_services_SERVICE_CHARGE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="0"
+						width="81"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{assigned_services_SERVICE_CODE}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

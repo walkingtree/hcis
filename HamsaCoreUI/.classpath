@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISCoreDA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISCoreModel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBill"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBillDA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iBillingBM"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/InpatientDA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/InpatientManagement"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ProcessInterface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ReportsManagerBL"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UserManagerBL"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UserManagerDA"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UserManagerModels"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dwr.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-attributes-api.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-attributes-compiler.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-beans.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-context.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-core.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/asm-commons-2.2.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/asm-util-2.2.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/asm.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aspectjlib.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-dbcp-1.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-pool.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ehcache-1.2.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaas.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javassist.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxen-1.1-beta-7.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jboss-archive-browsing.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jta.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-3.0.17-ga-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/persistence.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-agent.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aop.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aspects.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-jdbc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-orm.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-tomcat-weaver.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-tx.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xerces-2.6.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/avalon-logkit-2.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-anim.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-awt-util.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-bridge.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-css.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-dom.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-ext.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-gvt.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-parser.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-script.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-svg-dom.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-svggen.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-util.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/batik-xml.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/bsh-2.0b4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/cincom-jr-xmla.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/classes12.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/dvsl-1.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/hsqldb-1.7.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/iReport.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/itext-1.3.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/iTextAsian.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jakarta-bcel-20050813.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/JasperBabylon-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jasperreports-3.0.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jasperreports-extensions-1.3.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jasperreports-flash-2.0.5.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/javacup.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jaxen-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jcmdline-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jcommon-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jdt-compiler-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jfreechart-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jfreechart-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_activation-1.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_axis-1.4patched.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_jasperserver-common-ws-3.0.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_jasperserver-ireport-plugin-3.0.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_jaxrpc.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_mail-1.4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/js_wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/jsmoothgen-ant-0.9.7.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/looks-2.0-rc.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/microba-0.4.1-bin.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/mondrian-2.3.2.8944.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/mxmlc.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/nsisant-1.1.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/png-encoder-1.5.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/poi-3.0.1-FINAL-20070705.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/rex-20080421.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/saaj-api-1.3.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/servlet.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/servletapi-2.3.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/sqleonardo-2007.03.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/sslext-1.2-0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/struts-core-1.3.8.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/struts-taglib-1.3.8.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/struts-tiles-1.3.8.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/swingx-2007_05_13.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/tinylaf.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/toniclf.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/velocity-1.5.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/velocity-dvsl-1.0.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/velocity-tools-1.4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/velocity-tools-generic-1.4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/velocity-tools-view-1.4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/werken-xpath-0.9.4.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/xml-apis-ext.jar"/>
+	<classpathentry kind="lib" path="/ReportsManagerBL/lib/commons-beanutils-1.7.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HCISBillingProcesses"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_REMOTING"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.springframework.MYECLIPSE_SPRING25_WEB"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_JAXB2"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_XMLBEANS"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_HTTP_CLIENT"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_SECURITY"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_XFIRE_MISC"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EagleWebServicesIntegration"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LIMS"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LIMSModel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OperationTheatreBL"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OperationTheatreBM"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

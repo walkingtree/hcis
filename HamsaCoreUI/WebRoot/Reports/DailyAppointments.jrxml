@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="DailyAppointments"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="595"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="AllSectionsNoDetail"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="doctorId" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="departmentCode" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="date" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="separator" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[java.io.File.separator]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportsDirPath" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[SELECT
+     count(appointments.`APPOINTMENT_NUMBER`)AS APPOINTMENT_NUMBER,
+     appointments.`APPOINTMENT_STATUS_CODE` AS APPOINTMENT_STATUS_CODE,
+     doctor.`DOCTOR_ID` AS DOCTOR_ID,
+     appointments.`CREATE_DTM` AS CREATE_DTM,
+     doctor.`FULL_NAME` AS FULL_NAME,
+     department.`DEPARTMENT_NAME` AS DEPARTMENT_NAME,
+     department.`DEPARTMENT_CODE` AS DEPARTMENT_CODE,
+     appointments.`CAPTURED_DTM` AS appointments_CAPTURED_DTM,
+     appointments.`LAST_MODIFIED_DTM` AS appointments_LAST_MODIFIED_DTM,
+     appointments.`APPOINTMENT_DATE` AS appointments_APPOINTMENT_DATE
+FROM
+     `doctor` doctor INNER JOIN `appointments` appointments ON doctor.`DOCTOR_ID` = appointments.`DOCTOR_ID`
+     INNER JOIN `doctor_especialty` doctor_especialty ON doctor.`DOCTOR_ID` = doctor_especialty.`DOCTOR_ID`
+     INNER JOIN `department` department ON doctor_especialty.`DEPARTMENT_CODE` = department.`DEPARTMENT_CODE`
+WHERE
+     (($P{doctorId} IS NULL) OR ($P{doctorId} = '')  OR (doctor.`DOCTOR_ID` = $P{doctorId}))
+ AND (($P{departmentCode} IS NULL)  OR ($P{departmentCode} = '')  OR (department.`DEPARTMENT_CODE` = $P{departmentCode}))
+ AND ((($P{date} IS NULL)  OR ($P{date} = ''))  OR (DATE(appointments.`APPOINTMENT_DATE`) = DATE((str_to_date($P{date},"%d/%m/%Y")))))
+GROUP BY
+     DOCTOR_ID,
+     APPOINTMENT_STATUS_CODE
+ORDER BY
+     DOCTOR_ID ASC,
+     APPOINTMENT_STATUS_CODE ASC]]></queryString>
+
+	<field name="APPOINTMENT_NUMBER" class="java.lang.Long"/>
+	<field name="APPOINTMENT_STATUS_CODE" class="java.lang.String"/>
+	<field name="DOCTOR_ID" class="java.lang.Integer"/>
+	<field name="CREATE_DTM" class="java.util.Date"/>
+	<field name="FULL_NAME" class="java.lang.String"/>
+	<field name="DEPARTMENT_NAME" class="java.lang.String"/>
+	<field name="DEPARTMENT_CODE" class="java.lang.String"/>
+
+	<variable name="total" class="java.lang.Long" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{APPOINTMENT_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="cancelled" class="java.lang.Long" resetType="Group" incrementType="Report" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{APPOINTMENT_STATUS_CODE}.equals("CANCELLED")?$F{APPOINTMENT_NUMBER}:new Long(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Long(0)]]></initialValueExpression>
+	</variable>
+	<variable name="rescheduled" class="java.lang.Long" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{APPOINTMENT_STATUS_CODE}.equals("RESCHEDULED")?$F{APPOINTMENT_NUMBER}:new Long(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Long(0)]]></initialValueExpression>
+	</variable>
+	<variable name="noShow" class="java.lang.Long" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[($F{APPOINTMENT_STATUS_CODE}.equals("CAPTURED")||$F{APPOINTMENT_STATUS_CODE}.equals("VISITED"))? new Long(0):$F{APPOINTMENT_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Long(0)]]></initialValueExpression>
+	</variable>
+	<variable name="visited" class="java.lang.Long" resetType="Group" resetGroup="doctorGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{APPOINTMENT_STATUS_CODE}.equals("VISITED")?$F{APPOINTMENT_NUMBER}:new Long(0)]]></variableExpression>
+	</variable>
+	<variable name="totalOfTotals" class="java.lang.Long" resetType="Report" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{total}]]></variableExpression>
+	</variable>
+	<variable name="departmentTotal" class="java.lang.Long" resetType="Group" resetGroup="departmentGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{APPOINTMENT_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Long(0)]]></initialValueExpression>
+	</variable>
+	<variable name="grandTotal" class="java.lang.Long" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{APPOINTMENT_NUMBER}]]></variableExpression>
+	</variable>
+
+		<group  name="departmentGroup" >
+			<groupExpression><![CDATA[$F{DEPARTMENT_CODE}]]></groupExpression>
+			<groupHeader>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Group" evaluationGroup="doctorGroup"  hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="595"
+						height="20"
+						backcolor="#E0EBEC"
+						key="textField-9"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{DEPARTMENT_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="152"
+						y="0"
+						width="43"
+						height="18"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Sub total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="195"
+						y="0"
+						width="50"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{departmentTotal}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="doctorGroup" >
+			<groupExpression><![CDATA[$F{DOCTOR_ID}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="245"
+						y="0"
+						width="70"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{cancelled}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="455"
+						y="0"
+						width="135"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-2"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{visited}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="395"
+						y="0"
+						width="60"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-3"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{noShow}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="315"
+						y="0"
+						width="80"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField-4"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{rescheduled}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Group" evaluationGroup="doctorGroup"  hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="1"
+						y="0"
+						width="194"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{FULL_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="195"
+						y="0"
+						width="50"
+						height="20"
+						backcolor="#DDE2E4"
+						key="textField"/>
+					<box>					<pen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.0" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.0" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{total}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="79"
+						y="6"
+						width="501"
+						height="40"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText-1"/>
+					<box>					<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="25" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Walking Tree Consultancy Services]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="1"
+						width="66"
+						height="47"
+						key="image-1"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{reportsDirPath}+ $P{separator}+ "images"+$P{separator}+"WTC_logo.JPG"]]></imageExpression>
+				</image>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="40"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="595"
+						height="40"
+						forecolor="#FFFFFF"
+						backcolor="#A7C1CE"
+						key="staticText-6"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="14" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[DOCTOR WISE DAILY APPOINTMENTS]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="182"
+						y="23"
+						width="223"
+						height="15"
+						backcolor="#FFFFFF"
+						key="textField-8"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["For date - " + (($P{date} == null  || $P{date} == "") ?  "ALL" : $P{date})]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="27"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="195"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-1"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[DOCTOR NAME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="195"
+						y="0"
+						width="50"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-1"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TOTAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="245"
+						y="0"
+						width="70"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-2"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[CANCELLED]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="395"
+						y="0"
+						width="60"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-4"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[NO SHOW]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="455"
+						y="0"
+						width="140"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-5"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[PATIENT VISITED DOCTOR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="315"
+						y="0"
+						width="80"
+						height="27"
+						forecolor="#000000"
+						backcolor="#D9DCE3"
+						key="staticText-3"/>
+					<box>					<pen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<topPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<leftPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<bottomPen lineWidth="0.5" lineColor="#A7C1CE"/>
+					<rightPen lineWidth="0.5" lineColor="#A7C1CE"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[RESCHEDULE]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="20"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="132"
+						y="2"
+						width="63"
+						height="18"
+						key="staticText-8"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Grand Total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="195"
+						y="2"
+						width="50"
+						height="18"
+						key="textField-6"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Long"><![CDATA[$V{grandTotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="30"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="6"
+						y="0"
+						width="100"
+						height="29"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="30"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="6"
+						y="0"
+						width="100"
+						height="29"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

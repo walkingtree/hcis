@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" >
+
+
+	<bean id="OTDataModelManager" class="in.wtc.hcis.ot.bl.common.OTDataModelManagerImpl">
+		<property name="otDetailDAO">
+			<ref bean="OtDetailDAO"/>
+		</property>
+		<property name="otSurgeryDAO">
+			<ref bean="OtSurgeryDAO"/>
+		</property>
+		<property name="otSurgeryAssociationDAO">
+			<ref bean="OtSurgeryAssociationDAO"/>
+		</property>
+		<property name="otSurgeryStatusDAO">
+			<ref bean="OtSurgeryStatusDAO"/>
+		</property>
+		<property name="otSurgeryStatusTimeDAO">
+			<ref bean="OtSurgeryStatusTimeDAO"/>
+		</property>
+		<property name="otBookingDAO">
+			<ref bean="OtBookingDAO"/>
+		</property>
+		<property name="patientSurgeryNotesDAO">
+			<ref bean="OtPatientSurgeryNotesDAO"/>
+		</property>
+	</bean>    
+
+	<bean id="OTDataModelConverter" class="in.wtc.hcis.ot.bl.common.OTDataModelConverter">
+		<property name="ipDataModelManager">
+			<ref bean="IPDataModelManager"/>
+		</property>
+		<property name="entityManager">
+			<ref bean="EntityManager"/>
+		</property>
+		<property name="otDataModelManager">
+			<ref bean="OTDataModelManager"/>
+		</property>	
+		<property name="dataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>	
+	</bean>
+	
+	<bean id="OTReferenceDataManager" class="in.wtc.hcis.ot.bl.common.OTReferenceDataManagerImpl">
+		<property name="otDetailDAO">
+			<ref bean="OtDetailDAOExtn"/>
+		</property>
+	</bean>
+	<bean id="OTManager" class="in.wtc.hcis.ot.bl.configuration.OTManagerImpl">
+		<property name="otdataModelConverter">
+			<ref bean="OTDataModelConverter"/>
+		</property>
+		<property name="otDataModelManager">
+			<ref bean="OTDataModelManager"/>
+		</property>
+		<property name="otDetailDAO">
+			<ref bean="OtDetailDAOExtn"/>
+		</property>
+		<property name="otSurgeryAssociationDAO">
+			<ref bean="OtSurgeryAssociationDAOExtn"/>
+		</property>
+		
+		<property name="dataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+		<property name="doctorManager">
+			<ref bean="DoctorManager"/>
+		</property>
+		<property name="otBookingDAO">
+			<ref bean="OtBookingDAOExtn"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="otPatientSurgeryDAO">
+			<ref bean="OtPatientSurgeryDAO"/>
+		</property>
+		<property name="surgeryStatusTimeDAO">
+			<ref bean="OtSurgeryStatusTimeDAO"/>
+		</property>
+		<property name="bookingActivityDAO">
+			<ref bean="OtBookingActivityDAO"/>
+		</property>
+	</bean> 
+	<bean id="SurgeryManager" class="in.wtc.hcis.ot.bl.surgery.SurgeryManagerImpl">
+		<property name="otdataModelConverter">
+			<ref bean="OTDataModelConverter"/>
+		</property>
+		<property name="otDataModelManager">
+			<ref bean="OTDataModelManager"/>
+		</property>
+		<property name="otSurgeryStatusDAO">
+			<ref bean="OtSurgeryStatusDAOExtn"/>
+		</property>
+		<property name="otSurgeryStatusTimeDAO">
+			<ref bean="OtSurgeryStatusTimeDAO"/>
+		</property>
+		<property name="otSurgeryDAO">
+			<ref bean="OtSurgeryDAO"/>
+		</property>
+		<property name="otSurgeryAssociationDAO">
+			<ref bean="OtSurgeryAssociationDAOExtn"/>
+		</property>
+		<property name="serviceManager">
+			<ref bean="ServiceManager"/>
+		</property>
+		<property name="patientSurgeryDAO">
+			<ref bean="OtPatientSurgeryDAOExtn"/>
+		</property>
+		<property name="patientDAO">
+			<ref bean="PatientDAOExtn"/>
+		</property>
+		<property name="commonDataManager">
+			<ref bean="CommonDataManager"/>
+		</property>
+		<property name="otBookingDAO">
+			<ref bean="OtBookingDAOExtn"/>
+		</property>
+		<property name="dataModelManager">
+			<ref bean="DataModelManager"/>
+		</property>
+		<property name="notesConfigurationDAO">
+			<ref bean="OtNotesConfigurationDAO"/>
+		</property>
+		<property name="patientSurgeryNotesDAO">
+			<ref bean="OtPatientSurgeryNotesDAO"/>
+		</property>
+		<property name="patientSurgeryActivityDAO">
+			<ref bean="OtPatientSurgeryActivityDAO"/>
+		</property>
+		<property name="statusChecklistAssoDAO">
+			<ref bean="OtStatusChecklistAssoDAOExtn"/>
+		</property>
+		<property name="patientSurgeryChecklistDAO">
+			<ref bean="OtPatientSurgeryChecklistDAO"/>
+		</property>
+		<property name="checkListManager">
+			<ref bean="CheckListManager"/>
+		</property>
+	</bean>              
+</beans>	
+
